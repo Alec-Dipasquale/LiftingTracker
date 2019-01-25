@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">306556255694-68kfsroigpb7tobflsp89obshstiegc0.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://liftingtracker-1e864.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">306556255694</string>
+    <string name="google_api_key" translatable="false">AIzaSyBQPW_wP5p7K0C48Vksg00wTVgL0xee2nQ</string>
+    <string name="google_app_id" translatable="false">1:306556255694:android:cf5a1386a4e5c783</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBQPW_wP5p7K0C48Vksg00wTVgL0xee2nQ</string>
+    <string name="google_storage_bucket" translatable="false">liftingtracker-1e864.appspot.com</string>
+    <string name="project_id" translatable="false">liftingtracker-1e864</string>
+</resources>

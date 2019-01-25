@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "306556255694",
+    "firebase_url": "https://liftingtracker-1e864.firebaseio.com",
+    "project_id": "liftingtracker-1e864",
+    "storage_bucket": "liftingtracker-1e864.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306556255694:android:cf5a1386a4e5c783",
+        "android_client_info": {
+          "package_name": "com.example.squale.liftingtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306556255694-cg96kq5uelbm3qo6l3hqi9bc1flki6hs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.squale.liftingtracker",
+            "certificate_hash": "5f14a8f9cffc7534f9c44f73ca1445edae25804a"
+          }
+        },
+        {
+          "client_id": "306556255694-68kfsroigpb7tobflsp89obshstiegc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQPW_wP5p7K0C48Vksg00wTVgL0xee2nQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306556255694-68kfsroigpb7tobflsp89obshstiegc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
