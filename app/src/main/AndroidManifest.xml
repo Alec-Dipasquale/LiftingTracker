@@ -39,6 +39,8 @@
         <activity
                 android:name=".AppOverlay"
                 android:theme="@style/AppTheme.popUpTheme"/>
+        <activity android:name=".ExercisePopWindow">
+        </activity>
     </application>
 
 </manifest>

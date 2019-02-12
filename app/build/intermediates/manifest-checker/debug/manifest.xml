@@ -49,6 +49,8 @@
         <activity
             android:name="com.example.squale.liftingtracker.AppOverlay"
             android:theme="@style/AppTheme.popUpTheme" />
+        <activity android:name="com.example.squale.liftingtracker.ExercisePopWindow" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

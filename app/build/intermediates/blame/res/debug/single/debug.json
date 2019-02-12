@@ -16,6 +16,10 @@
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\firebase-ui-auth-4.1.0.aar\\10ecd67e405b42a382fc9f0035defe06\\res\\drawable-v21\\fui_idp_button_background_google.xml"
     },
     {
+        "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_ic_launcher.png.flat",
+        "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\dynamic-calendar-1.0.1.aar\\ad3056756df81a5cc82bfdbcb6074945\\res\\drawable-hdpi-v4\\ic_launcher.png"
+    },
+    {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\a0fefd39b44fdc450a7e6d4ac2c7c0d3\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -94,6 +98,10 @@
     {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\a0fefd39b44fdc450a7e6d4ac2c7c0d3\\res\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_ic_launcher.png.flat",
+        "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\dynamic-calendar-1.0.1.aar\\ad3056756df81a5cc82bfdbcb6074945\\res\\drawable-mdpi-v4\\ic_launcher.png"
     },
     {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_tint_edittext.xml.flat",
@@ -1252,6 +1260,10 @@
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\a0fefd39b44fdc450a7e6d4ac2c7c0d3\\res\\drawable-mdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+        "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable_empty_calendar.png.flat",
+        "source": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\src\\main\\res\\drawable\\empty_calendar.png"
+    },
+    {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\a0fefd39b44fdc450a7e6d4ac2c7c0d3\\res\\drawable-mdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
@@ -1384,8 +1396,16 @@
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\a0fefd39b44fdc450a7e6d4ac2c7c0d3\\res\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+        "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_launcher.png.flat",
+        "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\dynamic-calendar-1.0.1.aar\\ad3056756df81a5cc82bfdbcb6074945\\res\\drawable-xhdpi-v4\\ic_launcher.png"
+    },
+    {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-16.0.1.aar\\df25f3f1104734a05f3d1eaebe16fb6c\\res\\drawable-xhdpi-v4\\common_google_signin_btn_text_dark_normal_background.9.png"
+    },
+    {
+        "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_launcher.png.flat",
+        "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\dynamic-calendar-1.0.1.aar\\ad3056756df81a5cc82bfdbcb6074945\\res\\drawable-xxhdpi-v4\\ic_launcher.png"
     },
     {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\layout_fui_confirmation_code_layout.xml.flat",
@@ -1762,6 +1782,10 @@
     {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\a0fefd39b44fdc450a7e6d4ac2c7c0d3\\res\\drawable-ldrtl-xxhdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_exercise_pop_window.xml.flat",
+        "source": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\src\\main\\res\\layout\\activity_exercise_pop_window.xml"
     },
     {
         "merged": "E:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_alert_dialog_button_bar_material.xml.flat",

@@ -28,6 +28,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.github.sillebille:dynamic-calendar:1.0.1'
+
 }
 
 allprojects {

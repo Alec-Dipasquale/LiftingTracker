@@ -3,8 +3,10 @@ package com.example.squale.liftingtracker;
 import android.app.DatePickerDialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.icu.text.MessagePattern;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,43 +14,34 @@ import android.widget.*;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Vector;
 
 import static android.view.Gravity.*;
 
 public class DayView extends AppCompatActivity{
 
+    //Local Variables
     private TextView mDateEditText;
     private Calendar mCurrentDate;
     private Bitmap mGeneratedDateIcon;
     private ImageGenerator mImageGenerator;
     private ImageView mDisplayGeneratedImage;
 
-    private Vector horizontalSetsLayoutIDs = new Vector();
-    private Vector btnNewSetIDs = new Vector();
-    private final int horizontalSetsLayoutID = 5000;
-    private final int btnNewSetID = 6000;
-    private final int singleSetLayoutID=7000;
-    private int currentButtonId;
-    private LinearLayout linAddSet;
-    private LinearLayout linAddExercise;
-    private LinearLayout exerciseLayout;
-    private LinearLayout horizontalSetsLayout;
-    private LinearLayout exerciseTitleBarLayout;
-    private LinearLayout setsButtonLayout;
-    private LinearLayout singleSetLayout;
-    private ImageButton btnNewSet;
+    private ArrayList<LinearLayout> horizontalSetsLayoutArrayList = new ArrayList<LinearLayout>();
+    private ArrayList<Integer> setsCountArrayList = new ArrayList<Integer>();
+    private ArrayList<ImageButton> btnNewSetArrayList = new ArrayList<ImageButton>();
+
+    private static final String TAG = "DayView";
+
+    private final int horizontalSetsLayoutID = 20000;
+    private final int btnNewSetID = 10000;
 
     private int day;
     private int month;
     private int year;
     private String stringDate;
-    private int countSets = 0;
     private int countExercises = 0;
-
-    private static final String TAG = "Testing";
-
 
 
     @Override
@@ -58,12 +51,7 @@ public class DayView extends AppCompatActivity{
         Button bAddExercise = (Button) findViewById(R.id.btnAddSet);
         AppOverlay appOverlay = new AppOverlay();
 
-        bAddExercise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addExercise();
-            }
-        });
+        bAddExercise.setOnClickListener(new addExerciseClick());
 
         appOverlay.optionsAction(DayView.this);
 
@@ -71,47 +59,52 @@ public class DayView extends AppCompatActivity{
 
     }
 
-    private void addExercise(){
+    private void addExerciseClicked(View view){
+        pickExercise();
+
         countExercises++;
+        setsCountArrayList.add(0);
 
 
-        linAddExercise = (LinearLayout) findViewById(R.id.linAddExercise);
+        LinearLayout linAddExercise = (LinearLayout) findViewById(R.id.linAddExercise);
 
-        exerciseLayout = new LinearLayout(this);
-        exerciseLayout.setOrientation(LinearLayout.VERTICAL);
-        exerciseLayout.setGravity(View.FOCUS_LEFT);
-        exerciseLayout.setPadding(5,5,5,5);
+        LinearLayout exerciseFullLayoutView = new LinearLayout(DayView.this);
+        exerciseFullLayoutView.setOrientation(LinearLayout.VERTICAL);
+        exerciseFullLayoutView.setGravity(View.FOCUS_LEFT);
+        exerciseFullLayoutView.setPadding(5,25,5,25);
+        exerciseFullLayoutView.setElevation(500* getApplicationContext().getResources().getDisplayMetrics().density);
 
 
-        exerciseTitleBarLayout = new LinearLayout(this);
+        LinearLayout exerciseTitleBarLayout = new LinearLayout(DayView.this);
         exerciseTitleBarLayout.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         exerciseTitleBarLayout.setOrientation(LinearLayout.HORIZONTAL);
         exerciseTitleBarLayout.setGravity(FILL);
         exerciseTitleBarLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-        setsButtonLayout = new LinearLayout(this);
+        LinearLayout setsButtonLayout = new LinearLayout(DayView.this);
         setsButtonLayout.setOrientation(LinearLayout.HORIZONTAL);
         setsButtonLayout.setGravity(END);
         setsButtonLayout.setBackgroundColor(Color.WHITE);
 
-        horizontalSetsLayout = new LinearLayout(this);
+
+        LinearLayout horizontalSetsLayout = new LinearLayout(DayView.this);
         horizontalSetsLayout.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         horizontalSetsLayout.setOrientation(LinearLayout.VERTICAL);
         horizontalSetsLayout.setGravity(FILL);
         horizontalSetsLayout.setBackgroundColor(Color.WHITE);
         horizontalSetsLayout.setId(horizontalSetsLayoutID +countExercises);
-        horizontalSetsLayoutIDs.add(horizontalSetsLayoutID +countExercises);
+        horizontalSetsLayoutArrayList.add(horizontalSetsLayout);
 
 
-        final TextView tvExercise = new TextView(this);
+        final TextView tvExercise = new TextView(DayView.this);
         tvExercise.setText("(Exercise)");
         tvExercise.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         tvExercise.setTextColor(Color.BLACK);
         tvExercise.setPadding(10,5,5,5);
 
-        final TextView etExerciseCount = new TextView(this);
+        final TextView etExerciseCount = new TextView(DayView.this);
         etExerciseCount.setText(String.format("%d", countExercises));
         etExerciseCount.setTextColor(Color.BLACK);
         etExerciseCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
@@ -119,50 +112,56 @@ public class DayView extends AppCompatActivity{
 
 
 
-        btnNewSet = new ImageButton(this);
+        ImageButton btnNewSet = new ImageButton(DayView.this);
         btnNewSet.setId(btnNewSetID +countExercises);
-        btnNewSetIDs.add(btnNewSetID +countExercises);
         btnNewSet.setImageResource(R.drawable.plus);
+        btnNewSet.setMaxHeight(30);
         btnNewSet.setLayoutParams(new LinearLayout.LayoutParams(400, 200));
+        btnNewSetArrayList.add(btnNewSet);
 
+        addSetClicked(btnNewSet);
 
-        exerciseLayout.addView(exerciseTitleBarLayout);
-        exerciseLayout.addView(horizontalSetsLayout);
+        exerciseFullLayoutView.addView(exerciseTitleBarLayout);
+        exerciseFullLayoutView.addView(horizontalSetsLayout);
         setsButtonLayout.addView(btnNewSet);
-        exerciseLayout.addView(setsButtonLayout);
+        exerciseFullLayoutView.addView(setsButtonLayout);
 
         exerciseTitleBarLayout.addView(etExerciseCount);
         exerciseTitleBarLayout.addView(tvExercise);
 
-        btnNewSet.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                currentButtonId = view.getId();
-                addSet();
-            }
-        });
-
-        linAddExercise.addView(exerciseLayout);
+        for(int i = 0; i<btnNewSetArrayList.size(); i++) {
+            ImageButton tempButton = btnNewSetArrayList.get(i);
+            tempButton.setOnClickListener(new addSetClick());
+        }
+        linAddExercise.addView(exerciseFullLayoutView);
 
     }
 
-    private void addSet(){
+    private void pickExercise(){
+        
+    }
 
-        countSets++;
-        singleSetLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    private void addSetClicked(View view){
+
+        int id = view.getId() - btnNewSetID;
+        int setCount = (setsCountArrayList.get(id-1)+1);
+
+        setsCountArrayList.set(id-1, setCount);
+
+
+        LinearLayout singleSetLayout = new LinearLayout(DayView.this);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.weight = 1;
         singleSetLayout.setOrientation(LinearLayout.HORIZONTAL);
         singleSetLayout.setGravity(FILL_HORIZONTAL);
         singleSetLayout.setLayoutParams(layoutParams);
-        singleSetLayout.setId(singleSetLayoutID+countSets);
 
 
 
-        TextView tvSetsCount = new TextView(this); // this refers to the activity or the context.
-        EditText etReps = new EditText(this);
-        EditText etWeight  = new EditText(this);
+        TextView tvSetsCount = new TextView(DayView.this); // this refers to the activity or the context.
+        EditText etReps = new EditText(DayView.this);
+        EditText etWeight  = new EditText(DayView.this);
 
 
         // set attributes as need
@@ -174,7 +173,7 @@ public class DayView extends AppCompatActivity{
         etReps.setHint("Reps");
         etReps.setPadding(50,20,50,20);
 
-        tvSetsCount.setText(String.format("%d", countSets));
+        tvSetsCount.setText(String.format("%d", setsCountArrayList.get(id-1)));
         tvSetsCount.setTextColor(Color.BLACK);
         tvSetsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         tvSetsCount.setPadding(5,0, 20,0);
@@ -183,7 +182,12 @@ public class DayView extends AppCompatActivity{
         singleSetLayout.addView(etWeight);
         singleSetLayout.addView(etReps);
 
-        horizontalSetsLayout.addView(singleSetLayout);
+        for(int i =0; i<horizontalSetsLayoutArrayList.size(); i++){
+            LinearLayout tempLinearLayout = horizontalSetsLayoutArrayList.get(i);
+            if(tempLinearLayout.getId() - horizontalSetsLayoutID == id){
+                tempLinearLayout.addView(singleSetLayout);
+            }
+        }
 
     }
 
@@ -245,6 +249,22 @@ public class DayView extends AppCompatActivity{
 
             }
         });
+    }
+
+
+
+    class addExerciseClick implements View.OnClickListener{
+        @Override
+        public void onClick(View view){
+            addExerciseClicked(view);
+        }
+    }
+
+    class addSetClick implements View.OnClickListener{
+        @Override
+        public void onClick(View view){
+            addSetClicked(view);
+        }
     }
 }
 

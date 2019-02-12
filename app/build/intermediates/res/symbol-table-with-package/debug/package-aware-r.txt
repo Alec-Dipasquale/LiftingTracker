@@ -491,6 +491,7 @@ color abc_tint_spinner
 color abc_tint_switch_track
 color accent_material_dark
 color accent_material_light
+color backgroundColor
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -592,6 +593,7 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color tooltip_background_dark
 color tooltip_background_light
+color white
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -878,6 +880,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable empty_calendar
 drawable fui_ic_facebook_white_22dp
 drawable fui_ic_github_white_24dp
 drawable fui_ic_googleg_color_24dp
@@ -892,6 +895,7 @@ drawable fui_idp_button_background_phone
 drawable fui_idp_button_background_twitter
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable ic_launcher
 drawable lifting_logo
 drawable lifting_logo_1080
 drawable lifting_logo_40
@@ -964,6 +968,7 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
+id btnAddSet
 id btn_holder
 id buttonPanel
 id button_create
@@ -1068,6 +1073,7 @@ id icon_group
 id icon_only
 id ifRoom
 id image
+id imageGen
 id info
 id invisible
 id invisible_frame
@@ -1076,6 +1082,7 @@ id item_touch_helper_previous_elevation
 id largeLabel
 id left
 id light
+id linAddExercise
 id line1
 id line3
 id linearLayout
@@ -1128,6 +1135,7 @@ id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
+id scrollWorkout
 id scrollable
 id search_badge
 id search_bar
@@ -1187,6 +1195,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id trouble_signing_in
+id tvDateEntered
 id tvFirstNum
 id tvFirstPR
 id tvPR
@@ -1252,6 +1261,7 @@ layout abc_tooltip
 layout activity_app_overlay
 layout activity_calculator_activity
 layout activity_day_view
+layout activity_exercise_pop_window
 layout activity_home
 layout activity_login
 layout activity_personal_record_settings
@@ -1368,6 +1378,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string dd_mm_yyyy
 string default_web_client_id
 string email_address
 string facebook_application_id
