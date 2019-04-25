@@ -1,5 +1,7 @@
 package com.example.squale.liftingtracker;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -37,7 +39,9 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             //starting login activity
             startActivity(new Intent(this, LoginActivity.class));
+
         }
+
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         tvUser.setText("Welcome, " + currentUser.getEmail());
 

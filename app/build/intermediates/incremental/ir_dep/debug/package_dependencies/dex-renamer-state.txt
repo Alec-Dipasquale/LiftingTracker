@@ -1,4 +1,4 @@
-#Tue Jan 29 15:17:25 EST 2019
-base.0=E\:\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
+#Tue Apr 23 02:25:28 EDT 2019
+base.0=C\:\\Projects\\Temporary\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
 path.0=classes.dex
 renamed.0=classes.dex

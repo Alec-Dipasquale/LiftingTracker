@@ -51,11 +51,13 @@ public class AppOverlay extends AppCompatActivity {
         startActivity(new Intent(AppOverlay.this, LoginActivity.class));
     }
     private void settingsAction(){
-        Toast toast = Toast.makeText(getApplicationContext(), "Doesn't do shit yet dumby", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Doesn't do shit yet dumby", Toast.LENGTH_LONG);
         toast.show();
     }
     public void optionsAction(final Context activity){
-        View rootView = ((Activity)activity).getWindow().getDecorView().findViewById(android.R.id.content);
+        View rootView = ((Activity)activity).getWindow().getDecorView().findViewById(
+                android.R.id.content);
         ImageButton btnOptions =  (ImageButton) rootView.findViewById(R.id.bSettings);
         btnOptions.setOnClickListener(new View.OnClickListener() {
             @Override

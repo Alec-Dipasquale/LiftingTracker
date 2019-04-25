@@ -969,6 +969,8 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id btnAddSet
+id btnFinish
+id btnTestLoad
 id btn_holder
 id buttonPanel
 id button_create
