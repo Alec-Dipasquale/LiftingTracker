@@ -61,6 +61,20 @@ public class AddSet {
 
     }
 
+    public String getSetInfoString(){
+        return getSetCount() + "\t" + getWeight() + "\t" + getReps();
+    }
 
+    public String getSetCount(){
+        return  "s" + this.count;
+    }
 
+    public String getWeight(){
+        return this.etWeight.getText().toString();
+
+    }
+
+    public String getReps(){
+        return this.etReps.getText().toString();
+    }
 }

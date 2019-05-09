@@ -61,7 +61,22 @@
                             android:textSize="15sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
+
                 </LinearLayout>
+                <Button
+                    android:id="@+id/btnFinish"
+                    android:text="Finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+
+                <Button
+                    android:id="@+id/btnTestLoad"
+                    android:text="TestLoad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+
             </LinearLayout>
         </ScrollView>
 
@@ -70,19 +85,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/btnFinish"
-            android:text="Finish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
 
-        <Button
-            android:id="@+id/btnTestLoad"
-            android:text="TestLoad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
 
     </LinearLayout>
 

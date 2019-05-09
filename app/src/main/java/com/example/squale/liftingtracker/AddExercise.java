@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import static android.view.Gravity.END;
 import static android.view.Gravity.FILL;
 
@@ -18,19 +20,17 @@ class AddExercise {
     private LinearLayout llAddExercise;
     private LinearLayout llTitleBar;
     private EditText etExerciseName;
-    private String exercise;
     private LinearLayout llSetButton;
     private ImageButton btnAddSet;
     private LinearLayout llSetsList;
     private TextView tvExerciseCount;
     private Context context;
-    private View view;
-    private int count = 0;
-    private int setsCount = 0;
+    private ArrayList<AddSet>  arrSet = new ArrayList<AddSet>();
 
-    AddExercise(int count, LinearLayout linearLayoutAddedTo, Context context, View view) {
+
+
+    AddExercise(int count ,LinearLayout linearLayoutAddedTo, Context context, View view) {
         this.context = context;
-        this.count = count;
         this.llAddExercise = new LinearLayout(context);
         this.llTitleBar = new LinearLayout(context);
         this.linearLayoutAddedTo = linearLayoutAddedTo;
@@ -77,7 +77,7 @@ class AddExercise {
         etExerciseName.setId(View.generateViewId());
 
 
-        tvExerciseCount.setText(String.format("%d", this.count));
+        tvExerciseCount.setText(String.format("%d", count));
         tvExerciseCount.setTextColor(Color.BLACK);
         tvExerciseCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         tvExerciseCount.setPadding(5, 5, 10, 5);
@@ -89,8 +89,8 @@ class AddExercise {
         btnAddSet.setLayoutParams(new LinearLayout.LayoutParams(400, 200));
         btnAddSet.setId(View.generateViewId());
 
-        setsCount++;
-        AddSet addSet = new AddSet(setsCount, llSetsList,context,btnAddSet);
+        AddSet addSet = new AddSet(arrSet.size()+1, llSetsList,context,btnAddSet);
+        arrSet.add(addSet);
 
         llAddExercise.addView(llTitleBar);
         llAddExercise.addView(llSetsList);
@@ -109,17 +109,36 @@ class AddExercise {
     class addSetClick implements View.OnClickListener{
         @Override
         public void onClick(View view){
-            setsCount++;
-            AddSet addSet = new AddSet(setsCount, llSetsList,context,btnAddSet);
+            AddSet addSet = new AddSet(arrSet.size()+1 , llSetsList,context,btnAddSet);
+            arrSet.add(addSet);
+
         }
     }
 
-    public void setCount(int count){
-        this.count = count;
+    public String getExerciseInfoString(){
+        return getExerciseCount() + "\t" + getExercise() + '\n' + getSetsInfoString();
     }
 
-    public int getCount(){
-        return this.count;
+    private String getExerciseCount() {
+        return "e" + tvExerciseCount.getText().toString();
     }
+
+    public String getSetsInfoString(){
+        AddSet object = this.arrSet.get(0);
+        StringBuilder sb = new StringBuilder(object.getSetInfoString());
+        for(int i = 1; i<this.arrSet.size(); i++){
+            object = this.arrSet.get(i);
+            sb.append("\t").append(object.getSetInfoString());
+        }
+        return sb.toString();
+    }
+
+    public String getExercise(){
+        return this.etExerciseName.getText().toString();
+    }
+
+
+
+
 
 }

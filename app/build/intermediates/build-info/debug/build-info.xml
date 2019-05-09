@@ -2,34 +2,34 @@
 <instant-run
     abi="x86"
     api-level="28"
-    build-mode="COLD"
+    build-mode="HOT_WARM"
     density="560dpi"
     format="10"
     plugin-version="3.4.0"
-    timestamp="1556157289466"
+    timestamp="1556679230927"
     token="-6166036865478760251"
-    verifier="METHOD_DELETED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="199" />
+        duration="328" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="28" />
     <task
         name="instant-run-transform"
-        duration="42" />
+        duration="18" />
     <task
         name="verifier"
-        duration="9" />
+        duration="4" />
 
     <artifact
-        location="C:\Projects\Temporary\Dev\AllAndroid\AndroidStudioProjects\LiftingTracker\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
-        type="SPLIT" />
+        location="C:\Projects\Temporary\Dev\AllAndroid\AndroidStudioProjects\LiftingTracker\app\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
 
     <build
         build-mode="FULL"
-        timestamp="1556150004341"
+        timestamp="1556643301336"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Projects\Temporary\Dev\AllAndroid\AndroidStudioProjects\LiftingTracker\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
@@ -73,11 +73,19 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1556157289466"
-        verifier="METHOD_DELETED" >
+        timestamp="1556679201316"
+        verifier="METHOD_ADDED" >
         <artifact
             location="C:\Projects\Temporary\Dev\AllAndroid\AndroidStudioProjects\LiftingTracker\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1556679230927"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Projects\Temporary\Dev\AllAndroid\AndroidStudioProjects\LiftingTracker\app\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

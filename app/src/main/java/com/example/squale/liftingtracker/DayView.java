@@ -1,6 +1,7 @@
 package com.example.squale.liftingtracker;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.icu.text.MessagePattern;
@@ -22,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -40,20 +42,20 @@ public class DayView extends AppCompatActivity{
     private ImageView mDisplayGeneratedImage;
 
     private ArrayList<LinearLayout> horizontalSetsLayoutArrayList = new ArrayList<LinearLayout>();
-    private ArrayList<Integer> setsCountArrayList = new ArrayList<Integer>();
-    private ArrayList<ImageButton> btnNewSetArrayList = new ArrayList<ImageButton>();
 
     private static final String TAG = "DayView";
 
     private final int horizontalSetsLayoutID = 20000;
-    private final int btnNewSetID = 10000;
 
     private int day;
     private int month;
     private int year;
     private String stringDate;
-    private int countExercises = 0;
-    private int addExerciseCount = 0;
+    private String file = "MyNewFile";
+
+
+
+
 
 
 
@@ -62,21 +64,95 @@ public class DayView extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_day_view);
-
-
         Button bAddExercise = (Button) findViewById(R.id.btnAddSet);
+        LinearLayout llExercise = (LinearLayout) findViewById(R.id.linAddExercise);
+        final Day full = new Day(stringDate, bAddExercise, llExercise, DayView.this);
+        final Student p1 = new Student(1, 2, "random String");
+
+
         Button bFinish = (Button) findViewById(R.id.btnFinish);
         Button bTestLoad = (Button) findViewById(R.id.btnTestLoad);
         AppOverlay appOverlay = new AppOverlay();
 
-        bFinish.setOnClickListener(new finishWorkoutSession());
-        bTestLoad.setOnClickListener(new testLoad());
-        bAddExercise.setOnClickListener(new addExerciseClick());
+        bFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    FileOutputStream fOut = openFileOutput(file,MODE_PRIVATE);
+                    fOut.write(full.getWorkoutInfoString().getBytes());
+
+                    fOut.close();
+                    File filePath = new File(getFilesDir(),file);
+                    /*if (filePath.exists()){
+                        filePath.delete();
+                    }
+                    filePath.createNewFile();*/
+                    Toast.makeText(getBaseContext(), "File Saved at " + filePath +"Contents " +full.toString(), Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e){
+                    Log.d(TAG, "Error initializing stream");
+                }
+            }
+        });
+        bTestLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    FileInputStream fIn = openFileInput(file);
+                    int c;
+                    String temp = "";
+
+                    while ((c = fIn.read())!= -1)
+                    {
+                        temp = temp + Character.toString((char)c);
+                    }
+                    Log.d(TAG, temp);
+                    Toast.makeText(getBaseContext(), "File Read Successfully", Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         appOverlay.optionsAction(DayView.this);
 
         createCalendar();
 
+    }
+
+    public void finishWorkout(Day full){
+        String file = "newFile.tmp";
+        FileOutputStream fOut = null;
+        try {
+            fOut = openFileOutput(file,MODE_PRIVATE);
+            ObjectOutputStream objectOutStream = new ObjectOutputStream(fOut);
+            objectOutStream.writeObject(full);
+            fOut.close();
+            //objectOutStream.close();
+            File filePath = new File(getFilesDir(),file);
+            Toast.makeText(getBaseContext(), "File Saved at " +filePath +"Contents Some bullshit", Toast.LENGTH_LONG).show();
+
+
+        }  catch (IOException e) {
+            Log.d(TAG, "Error initializing stream");
+        }
+
+//        try {
+//            String filepath = "src\\main\\res\\userFiles\\obj";
+//            FileOutputStream fileOut = new FileOutputStream(filepath);
+//            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+//            objectOut.writeObject(day);
+//            objectOut.close();
+//            Log.d(TAG, "finishWorkout file made successfully");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.d(TAG, "finishWorkout Failed");
+//        }
     }
 
     private void finishWorkOutSessionClicked(View view) {
@@ -207,14 +283,15 @@ public class DayView extends AppCompatActivity{
         public void onClick(View view){testLoadClicked(view);}
     }
 
-    class addExerciseClick implements View.OnClickListener{
-        @Override
-        public void onClick(View view){
-            addExerciseCount++;
-            LinearLayout linAddExercise = (LinearLayout) findViewById(R.id.linAddExercise);
-            AddExercise addExercise = new AddExercise(addExerciseCount, linAddExercise,DayView.this, view);
-        }
-    }
+//    class finishClick implements View.OnClickListener{
+//        @Override
+//        public void onClick(View view){
+//            //full.finishWorkout(view);
+//            finishWorkout(full);
+//        }
+//    }
+
+
 
 
 
