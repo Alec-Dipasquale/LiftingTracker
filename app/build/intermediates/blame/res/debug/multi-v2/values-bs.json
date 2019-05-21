@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Projects\\Temporary\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-bs\\values-bs.xml",
+            "outputFile": "/home/alec/Projects/Android Projects/LiftingTracker/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-bs/values-bs.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-2\\files-2.1\\f1be9353d74b31d1ed0d3a24d37bd6f5\\res\\values-bs\\values-bs.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/9051bf780a6d32db5cdfde28604ac2fe/res/values-bs/values-bs.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-2\\files-2.1\\d5fee803cf090768ee3650d0cfde89fb\\res\\values-bs\\values-bs.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/be6b465b341f56d84be2b25a42f6179d/res/values-bs/values-bs.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-2\\files-2.1\\ed4ffa7ce9e6d08cf6994b27c66cb7d9\\res\\values-bs\\values.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/d1e30532c2c96c1034e31d3a2409c9bf/res/values-bs/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-2\\files-2.1\\dfb60dd4ffc758084447fb7b05bfc78e\\res\\values-bs\\values.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/eabdad9dffded3697faa157cbabdac05/res/values-bs/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

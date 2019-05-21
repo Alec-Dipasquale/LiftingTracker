@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Projects\\Temporary\\Dev\\AllAndroid\\AndroidStudioProjects\\LiftingTracker\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "/home/alec/Projects/Android Projects/LiftingTracker/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-2\\files-2.1\\218ba2b2d2afd1e6c903106d2db0a2c9\\res\\values-v24\\values-v24.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/fc7f489822e38bd131dbb9bbebb5af00/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\alecd\\.gradle\\caches\\transforms-2\\files-2.1\\d5fee803cf090768ee3650d0cfde89fb\\res\\values-v24\\values-v24.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/be6b465b341f56d84be2b25a42f6179d/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

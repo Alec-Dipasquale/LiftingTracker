@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
+
+import com.example.squale.liftingtracker.activity.HomeActivity;
+import com.example.squale.liftingtracker.activity.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,11 +34,11 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        Button bLogin = (Button) findViewById(R.id.bLogin);
-        TextView registerLink = (TextView) findViewById(R.id.tvRegisterHere);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        Button bLogin = findViewById(R.id.bLogin);
+        TextView registerLink = findViewById(R.id.tvRegisterHere);
+        progressBar =  findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
 
         registerLink.setOnClickListener(new View.OnClickListener(){
