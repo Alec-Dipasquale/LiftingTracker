@@ -2,6 +2,7 @@ package com.example.squale.liftingtracker.objects;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.squale.liftingtracker.R;
+
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,9 +27,8 @@ public class Exercise implements Serializable {
 
     private long id;
     private String name;
-    private Day day;
+    private Workout workout;
 
-    private LinearLayout linearLayoutAddedTo;
     private LinearLayout llAddExercise;
     private LinearLayout llTitleBar;
     private EditText etExerciseName;
@@ -35,22 +37,29 @@ public class Exercise implements Serializable {
     private LinearLayout llSetsList;
     private TextView tvExerciseCount;
     private Context context;
+    private LinearLayout linearLayoutAddedTo;
     private ArrayList<Set>  arrSet = new ArrayList<>();
 
 
 
     public Exercise(){}
 
-    public Exercise(int count , LinearLayout linearLayoutAddedTo, Context context, View view) {
+    public Exercise(long id, String name, Workout workout) {
+        this.id = id;
+        this.name = name;
+        this.workout = workout;
+    }
+
+    public void setUp(int count , LinearLayout linearLayoutAddedTo, Context context, View view) {
         this.context = context;
         this.llAddExercise = new LinearLayout(context);
         this.llTitleBar = new LinearLayout(context);
-        this.linearLayoutAddedTo = linearLayoutAddedTo;
         this.llSetButton = new LinearLayout(context);
         this.llSetsList = new LinearLayout(context);
         this.etExerciseName = new EditText(context);
         this.tvExerciseCount = new TextView(context);
         this.btnAddSet = new ImageButton(context);
+        this.linearLayoutAddedTo = linearLayoutAddedTo;
 
 
         llAddExercise.setOrientation(LinearLayout.VERTICAL);
@@ -101,7 +110,8 @@ public class Exercise implements Serializable {
         btnAddSet.setLayoutParams(new LinearLayout.LayoutParams(400, 200));
         btnAddSet.setId(View.generateViewId());
 
-        Set set = new Set(arrSet.size()+1, llSetsList,context,btnAddSet);
+        Set set = new Set();
+        set.setUp(arrSet.size()+1, llSetsList,context,btnAddSet);
         arrSet.add(set);
 
         llAddExercise.addView(llTitleBar);
@@ -118,10 +128,34 @@ public class Exercise implements Serializable {
         linearLayoutAddedTo.addView(llAddExercise);
     }
 
+
+    public void makeNonEditable(){
+        for(Set set : arrSet){
+            set.makeNonEditable();
+            if(TextUtils.isEmpty(set.getReps())){
+                arrSet.remove(set);
+            }
+        }
+        if(arrSet.isEmpty() && TextUtils.isEmpty(etExerciseName.getText().toString())){
+            linearLayoutAddedTo.removeView(llAddExercise);
+        }
+        etExerciseName.setEnabled(false);
+        llSetButton.removeView(btnAddSet);
+    }
+
+    public void makeEditable() {
+        for(Set set : arrSet){
+            set.makeEditable();
+        }
+        etExerciseName.setEnabled(true);
+        llSetButton.addView(btnAddSet);
+    }
+
     class addSetClick implements View.OnClickListener{
         @Override
         public void onClick(View view){
-            Set set = new Set(arrSet.size()+1 , llSetsList,context,btnAddSet);
+            Set set = new Set();
+            set.setUp(arrSet.size()+1 , llSetsList,context,btnAddSet);
             arrSet.add(set);
 
         }
@@ -165,11 +199,15 @@ public class Exercise implements Serializable {
         this.name = exerciseName;
     }
 
-    public Day getDay() {
-        return day;
+    public Workout getWorkout() {
+        return workout;
     }
 
-    public void setDay(Day day) {
-        this.day = day;
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
+    }
+
+    public int getSetsCount(){
+        return arrSet.size();
     }
 }

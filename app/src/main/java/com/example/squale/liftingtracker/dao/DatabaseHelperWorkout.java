@@ -1,27 +1,25 @@
 package com.example.squale.liftingtracker.dao;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DatabaseHelperDay extends SQLiteOpenHelper {
+public class DatabaseHelperWorkout extends SQLiteOpenHelper {
 
-    public static final String TAG = "DataBaseHelperDay";
+    public static final String TAG = "DataBaseHelperWorkout";
 
 
-    //columns of the day table
-    public static final String TABLE_DAY = "days";
-    public static final String COL_DAY_ID = "_id";        //PK
-    public static final String COL_DAY_DATE = "date";
+    //columns of the workout table
+    public static final String TABLE_WORKOUT = "workout";
+    public static final String COL_WORKOUT_ID = "_id";        //PK
+    public static final String COL_WORKOUT_DATE = "date";
 
     //columns of the exercise table
     public static final String TABLE_EXERCISE = "exercises";
-    public static final String COL_EXERCISE_ID = COL_DAY_ID;
+    public static final String COL_EXERCISE_ID = COL_WORKOUT_ID;
     public static final String COL_EXERCISE_NAME = "exercise_name";
-    public static final String COL_EXERCISE_DAY_ID = "day_id";
+    public static final String COL_EXERCISE_WORKOUT_ID = "workout_id";
 
     //columns of the sets table
     public static final String TABLE_SET = "set_table";
@@ -43,21 +41,21 @@ public class DatabaseHelperDay extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TABLE_EXERCISES = "CREATE TABLE " + TABLE_EXERCISE
             + "(" +  COL_EXERCISE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_EXERCISE_NAME + " TEXT NOT NULL, "
-            + COL_EXERCISE_DAY_ID + " INTEGER NOT NULL "
+            + COL_EXERCISE_WORKOUT_ID + " INTEGER NOT NULL "
             + ");";
 
-    private static final String SQL_CREATE_TABLE_DAYS = "CREATE TABLE " + TABLE_DAY
-            + "(" + COL_DAY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_DAY_DATE + " TEXT NOT NULL"
+    private static final String SQL_CREATE_TABLE_WORKOUT = "CREATE TABLE " + TABLE_WORKOUT
+            + "(" + COL_WORKOUT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COL_WORKOUT_DATE + " TEXT NOT NULL"
             + ");";
 
-    public DatabaseHelperDay(Context context){
+    public DatabaseHelperWorkout(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase database){
-        database.execSQL(SQL_CREATE_TABLE_DAYS);
+        database.execSQL(SQL_CREATE_TABLE_WORKOUT);
         database.execSQL(SQL_CREATE_TABLE_EXERCISES);
         database.execSQL(SQL_CREATE_TABLE_SETS);
     }
@@ -66,7 +64,7 @@ public class DatabaseHelperDay extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion){
         Log.w(TAG,
                 "Upgrading the database from version " + oldVersion +" to "+ newVersion);
-        database.execSQL("DROP TABLE IF EXISTS " + TABLE_DAY);
+        database.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKOUT);
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISE);
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_SET);
 
@@ -74,7 +72,7 @@ public class DatabaseHelperDay extends SQLiteOpenHelper {
     }
 
 //
-//    public DatabaseHelperDay(Context context){
+//    public DatabaseHelperWorkout(Context context){
 //        super(context, TABLE_NAME, null, 1);
 //    }
 //

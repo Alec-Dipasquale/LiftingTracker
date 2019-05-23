@@ -4,7 +4,7 @@
             "outputFile": "/home/alec/Projects/Android Projects/LiftingTracker/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/be6b465b341f56d84be2b25a42f6179d/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/5ed071d46f07951d736cd0017d149c3d/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/00eceab8203fc91b93514fae5378e5c6/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/95c0a5dbcc24eaa5b2eb642d46c4f660/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

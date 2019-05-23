@@ -10,7 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.squale.liftingtracker.objects.Day;
+import com.example.squale.liftingtracker.objects.Workout;
 import com.example.squale.liftingtracker.objects.Exercise;
 
 public class ExerciseDAO {
@@ -20,12 +20,12 @@ public class ExerciseDAO {
 
     // Database fields
     private SQLiteDatabase database;
-    private DatabaseHelperDay databaseHelper;
-    private String[] mAllColumns = { DatabaseHelperDay.COL_EXERCISE_ID,
-            DatabaseHelperDay.COL_EXERCISE_NAME, DatabaseHelperDay.COL_EXERCISE_DAY_ID };
+    private DatabaseHelperWorkout databaseHelper;
+    private String[] mAllColumns = { DatabaseHelperWorkout.COL_EXERCISE_ID,
+            DatabaseHelperWorkout.COL_EXERCISE_NAME, DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID };
 
     public ExerciseDAO(Context context) {
-        databaseHelper = new DatabaseHelperDay(context);
+        databaseHelper = new DatabaseHelperWorkout(context);
         this.context = context;
         // open the database
         try {
@@ -44,14 +44,14 @@ public class ExerciseDAO {
         databaseHelper.close();
     }
 
-    public Exercise createExercise(String exerciseName, long dayId) {
+    public Exercise createExercise(String exerciseName, long workoutId) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelperDay.COL_EXERCISE_NAME, exerciseName);
-        values.put(DatabaseHelperDay.COL_EXERCISE_DAY_ID, dayId);
+        values.put(DatabaseHelperWorkout.COL_EXERCISE_NAME, exerciseName);
+        values.put(DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID, workoutId);
         long insertId = database
-                .insert(DatabaseHelperDay.TABLE_EXERCISE, null, values);
-        Cursor cursor = database.query(DatabaseHelperDay.TABLE_EXERCISE, mAllColumns,
-                DatabaseHelperDay.COL_EXERCISE_DAY_ID + " = " + insertId, null, null,
+                .insert(DatabaseHelperWorkout.TABLE_EXERCISE, null, values);
+        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
+                DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID + " = " + insertId, null, null,
                 null, null);
         cursor.moveToFirst();
         Exercise newExercise = cursorToExercise(cursor);
@@ -62,14 +62,14 @@ public class ExerciseDAO {
     public void deleteExercise(Exercise exercise) {
         long id = exercise.getId();
         System.out.println("the deleted employee has the id: " + id);
-        database.delete(DatabaseHelperDay.TABLE_EXERCISE, DatabaseHelperDay.COL_EXERCISE_ID
+        database.delete(DatabaseHelperWorkout.TABLE_EXERCISE, DatabaseHelperWorkout.COL_EXERCISE_ID
                 + " = " + id, null);
     }
 
     public List<Exercise> getAllExercises() {
         List<Exercise> listExercises = new ArrayList<>();
 
-        Cursor cursor = database.query(DatabaseHelperDay.TABLE_EXERCISE, mAllColumns,
+        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
                 null, null, null, null, null);
 
         cursor.moveToFirst();
@@ -83,12 +83,12 @@ public class ExerciseDAO {
         return listExercises;
     }
 
-    public List<Exercise> getExercisesOfDay(long dayId) {
+    public List<Exercise> getExercisesOfWorkout(long workoutId) {
         List<Exercise> listExercise = new ArrayList<>();
 
-        Cursor cursor = database.query(DatabaseHelperDay.TABLE_EXERCISE, mAllColumns,
-                DatabaseHelperDay.COL_DAY_ID + " = ?",
-                new String[] { String.valueOf(dayId) }, null, null, null);
+        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
+                DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
+                new String[] { String.valueOf(workoutId) }, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -102,8 +102,8 @@ public class ExerciseDAO {
     }
 
     public Exercise getExerciseById(long id) {
-        Cursor cursor = database.query(DatabaseHelperDay.TABLE_DAY, mAllColumns,
-                DatabaseHelperDay.COL_DAY_ID + " = ?",
+        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, mAllColumns,
+                DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
                 new String[] { String.valueOf(id) }, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -117,11 +117,11 @@ public class ExerciseDAO {
         exercise.setName(cursor.getString(1));
 
         // get The company by id
-        long dayId = cursor.getLong(7);
-        DayDAO dao = new DayDAO(context);
-        Day day = dao.getDayById(dayId);
-        if (day != null)
-            exercise.setDay(day);
+        long workoutId = cursor.getLong(7);
+        WorkoutDAO dao = new WorkoutDAO(context);
+        Workout workout = dao.getWorkoutById(workoutId);
+        if (workout != null)
+            exercise.setWorkout(workout);
 
         return exercise;
     }

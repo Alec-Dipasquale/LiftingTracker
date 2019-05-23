@@ -15,24 +15,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.squale.liftingtracker.AppOverlay;
-import com.example.squale.liftingtracker.objects.Day;
+import com.example.squale.liftingtracker.objects.Workout;
 import com.example.squale.liftingtracker.R;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class DayActivity extends AppCompatActivity{
 
     //Local Variables
+
+    public static final String TAG = "DayActivity";
 
     private int count = 0;
 
@@ -41,18 +41,13 @@ public class DayActivity extends AppCompatActivity{
     private Bitmap mGeneratedDateIcon;
     private ImageGenerator mImageGenerator;
     private ImageView mDisplayGeneratedImage;
-
     private ArrayList<LinearLayout> horizontalSetsLayoutArrayList = new ArrayList<>();
-
-    private static final String TAG = "DayActivity";
-
     private final int horizontalSetsLayoutID = 20000;
 
     private int day;
     private int month;
     private int year;
     private String stringDate;
-    private String file = "MyNewFile";
 
 
 
@@ -65,56 +60,40 @@ public class DayActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_day_view);
-        Button bAddExercise = findViewById(R.id.btnAddSet);
+        final Button bAddExercise = findViewById(R.id.btnAddSet);
         LinearLayout llExercise = findViewById(R.id.linAddExercise);
-        final Day full = new Day(stringDate, bAddExercise, llExercise, DayActivity.this);
+        final LinearLayout llAddExercise = findViewById(R.id.lin_btn_holder_add_exercise);
+        final LinearLayout llWorkout = findViewById(R.id.linWorkout);
+        final Workout workout = new Workout();
+        workout.setUp(stringDate, bAddExercise, llExercise, DayActivity.this);
 
 
-        Button bFinish = findViewById(R.id.btnFinish);
-        Button bTestLoad = findViewById(R.id.btnTestLoad);
+        final Button bFinish = findViewById(R.id.btnFinish);
+        //Button bTestLoad = findViewById(R.id.btnTestLoad);
         AppOverlay appOverlay = new AppOverlay();
 
         bFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "finish clicked!");
+                workout.makeNonEditable(llWorkout, bFinish, llAddExercise, bAddExercise);
 
-                try {
-                    FileOutputStream fOut = openFileOutput(file,MODE_PRIVATE);
-                    fOut.write(full.getWorkoutInfoString().getBytes());
-
-                    fOut.close();
-                    File filePath = new File(getFilesDir(),file);
-                    /*if (filePath.exists()){
-                        filePath.delete();
-                    }
-                    filePath.createNewFile();*/
-                    Toast.makeText(getBaseContext(), "File Saved at " + filePath +"Contents " +full.toString(), Toast.LENGTH_LONG).show();
-                }
-                catch (Exception e){
-                    Log.d(TAG, "Error initializing stream");
-                }
-            }
-        });
-        bTestLoad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                try {
-                    FileInputStream fIn = openFileInput(file);
-                    int c;
-                    String temp = "";
-
-                    while ((c = fIn.read())!= -1)
-                    {
-                        temp = temp + Character.toString((char)c);
-                    }
-                    Log.d(TAG, temp);
-                    Toast.makeText(getBaseContext(), "File Read Successfully", Toast.LENGTH_LONG).show();
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+//
+//                try {
+//                    FileOutputStream fOut = openFileOutput(file,MODE_PRIVATE);
+//                    fOut.write(full.getWorkoutInfoString().getBytes());
+//
+//                    fOut.close();
+//                    File filePath = new File(getFilesDir(),file);
+//                    /*if (filePath.exists()){
+//                        filePath.delete();
+//                    }
+//                    filePath.createNewFile();*/
+//                    Toast.makeText(getBaseContext(), "File Saved at " + filePath +"Contents " +full.toString(), Toast.LENGTH_LONG).show();
+//                }
+//                catch (Exception e){
+//                    Log.d(TAG, "Error initializing stream");
+//                }
             }
         });
 
@@ -124,22 +103,23 @@ public class DayActivity extends AppCompatActivity{
 
     }
 
-    public void finishWorkout(Day full){
-        String file = "newFile.tmp";
-        FileOutputStream fOut;
-        try {
-            fOut = openFileOutput(file,MODE_PRIVATE);
-            ObjectOutputStream objectOutStream = new ObjectOutputStream(fOut);
-            objectOutStream.writeObject(full);
-            fOut.close();
-            //objectOutStream.close();
-            File filePath = new File(getFilesDir(),file);
-            Toast.makeText(getBaseContext(), "File Saved at " +filePath +"Contents Some bullshit", Toast.LENGTH_LONG).show();
+    public void finishWorkout(Workout full){
 
-
-        }  catch (IOException e) {
-            Log.d(TAG, "Error initializing stream");
-        }
+//        String file = "newFile.tmp";
+//        FileOutputStream fOut;
+//        try {
+//            fOut = openFileOutput(file,MODE_PRIVATE);
+//            ObjectOutputStream objectOutStream = new ObjectOutputStream(fOut);
+//            objectOutStream.writeObject(full);
+//            fOut.close();
+//            //objectOutStream.close();
+//            File filePath = new File(getFilesDir(),file);
+//            Toast.makeText(getBaseContext(), "File Saved at " +filePath +"Contents Some bullshit", Toast.LENGTH_LONG).show();
+//
+//
+//        }  catch (IOException e) {
+//            Log.d(TAG, "Error initializing stream");
+//        }
 
 //        try {
 //            String filepath = "src\\main\\res\\userFiles\\obj";

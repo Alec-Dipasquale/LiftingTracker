@@ -2,11 +2,15 @@ package com.example.squale.liftingtracker.objects;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
@@ -29,7 +33,14 @@ public class Set implements Serializable {
 
     public Set(){}
 
-    public Set(int count, LinearLayout llAddSet, Context context, View view){
+    public Set(long id, String weight, String reps, Exercise exercise) {
+        this.id = id;
+        this.weight = weight;
+        this.reps = reps;
+        this.exercise = exercise;
+    }
+
+    public void setUp(int count, LinearLayout llAddSet, Context context, View view){
         this.llAddSet = llAddSet;
         llSetAddedTo = new LinearLayout(context);
         this.count = count;
@@ -41,12 +52,9 @@ public class Set implements Serializable {
         llSetAddedTo.setGravity(FILL_HORIZONTAL);
         llSetAddedTo.setLayoutParams(layoutParams);
 
-
-
         this.tvSetsCount = new TextView(context); // this refers to the activity or the context.
         this.etReps = new EditText(context);
         this.etWeight  = new EditText(context);
-
 
         // set attributes as need
         etWeight.setLayoutParams(layoutParams);
@@ -67,8 +75,26 @@ public class Set implements Serializable {
         llSetAddedTo.addView(etReps);
 
         this.llAddSet.addView(llSetAddedTo);
+    }
 
+    public void makeNonEditable() {
+        this.setRepsFromEditText();
+        this.setWeightFromEditText();
+        if(TextUtils.isEmpty(etReps.getText().toString()) || TextUtils.isEmpty(etWeight.getText().toString())){
+            deleteSet();
+        }
+        etWeight.setEnabled(false);
+        etReps.setEnabled(false);
 
+    }
+
+    public void deleteSet(){
+        this.llAddSet.removeView(llSetAddedTo);
+    }
+
+    public void makeEditable(){
+        etWeight.setEnabled(true);
+        etReps.setEnabled(true);
     }
 
     public String getSetInfoString(){
@@ -96,8 +122,16 @@ public class Set implements Serializable {
         this.id = id;
     }
 
+    public void setWeightFromEditText(){
+        this.weight = this.etWeight.toString();
+    }
+
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    public void setRepsFromEditText(){
+        this.reps = this.etReps.toString();
     }
 
     public void setReps(String reps) {

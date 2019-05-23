@@ -4,7 +4,7 @@
             "outputFile": "/home/alec/Projects/Android Projects/LiftingTracker/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/00eceab8203fc91b93514fae5378e5c6/res/values-v26/values-v26.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/95c0a5dbcc24eaa5b2eb642d46c4f660/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
@@ -23,26 +23,7 @@
                     }
                 },
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/c9350d1e8b7625a99e1c78627d1ca25f/res/values-v26/values-v26.xml",
-                    "from": {
-                        "startLines": "2,6,10,14",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,253,438,631",
-                        "endLines": "5,9,13,17",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "248,433,626,806"
-                    },
-                    "to": {
-                        "startLines": "22,26,30,34",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "1330,1528,1713,1906",
-                        "endLines": "25,29,33,37",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "1523,1708,1901,2081"
-                    }
-                },
-                {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/be6b465b341f56d84be2b25a42f6179d/res/values-v26/values-v26.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/5ed071d46f07951d736cd0017d149c3d/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -58,6 +39,25 @@
                         "endLines": "2,3,7,11,15,20",
                         "endColumns": "74,86,12,12,12,92",
                         "endOffsets": "125,212,426,652,891,1228"
+                    }
+                },
+                {
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/e17ad309c18faac3717eda3428f6193f/res/values-v26/values-v26.xml",
+                    "from": {
+                        "startLines": "2,6,10,14",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,253,438,631",
+                        "endLines": "5,9,13,17",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "248,433,626,806"
+                    },
+                    "to": {
+                        "startLines": "22,26,30,34",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "1330,1528,1713,1906",
+                        "endLines": "25,29,33,37",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "1523,1708,1901,2081"
                     }
                 }
             ]

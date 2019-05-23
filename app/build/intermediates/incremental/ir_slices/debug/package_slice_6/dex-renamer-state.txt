@@ -1,4 +1,4 @@
-#Wed May 15 22:52:17 EDT 2019
+#Wed May 22 18:48:19 EDT 2019
 base.0=/home/alec/Projects/Android Projects/LiftingTracker/app/build/intermediates/transforms/dexMerger/debug/6
 path.0=classes.dex
 renamed.0=classes.dex

@@ -4,7 +4,7 @@
             "outputFile": "/home/alec/Projects/Android Projects/LiftingTracker/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/be6b465b341f56d84be2b25a42f6179d/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/5ed071d46f07951d736cd0017d149c3d/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

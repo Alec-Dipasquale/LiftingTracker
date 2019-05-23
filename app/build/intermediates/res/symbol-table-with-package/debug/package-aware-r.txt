@@ -970,7 +970,6 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btnAddSet
 id btnFinish
-id btnTestLoad
 id btn_holder
 id buttonPanel
 id button_create
@@ -1085,6 +1084,8 @@ id largeLabel
 id left
 id light
 id linAddExercise
+id linWorkout
+id lin_btn_holder_add_exercise
 id line1
 id line3
 id linearLayout
@@ -1357,6 +1358,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string add_exercise
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -1385,6 +1387,7 @@ string default_web_client_id
 string email_address
 string facebook_application_id
 string facebook_login_protocol_scheme
+string finish
 string firebase_database_url
 string firebase_web_host
 string fui_accessibility_logo
@@ -1474,6 +1477,7 @@ string register
 string search_menu_title
 string settings
 string status_bar_notification_info_overflow
+string testload
 string title_activity_home
 string twitter_consumer_key
 string twitter_consumer_secret

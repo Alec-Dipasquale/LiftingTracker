@@ -4,24 +4,24 @@
             "outputFile": "/home/alec/Projects/Android Projects/LiftingTracker/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ka/values-ka.xml",
             "map": [
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/eabdad9dffded3697faa157cbabdac05/res/values-ka/values.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/bba145b9dffe8b2cf0dd8a9cf11c8a91/res/values-ka/values-ka.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "201",
-                        "endOffsets": "448"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "27",
+                        "startLines": "38",
                         "startColumns": "4",
-                        "startOffsets": "3046",
-                        "endColumns": "201",
-                        "endOffsets": "3243"
+                        "startOffsets": "4668",
+                        "endColumns": "100",
+                        "endOffsets": "4764"
                     }
                 },
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/be6b465b341f56d84be2b25a42f6179d/res/values-ka/values-ka.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/5ed071d46f07951d736cd0017d149c3d/res/values-ka/values-ka.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/d1e30532c2c96c1034e31d3a2409c9bf/res/values-ka/values.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/98c3523ffa2b9924dabe163ea9dae52f/res/values-ka/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/9051bf780a6d32db5cdfde28604ac2fe/res/values-ka/values-ka.xml",
+                    "source": "/home/alec/.gradle/caches/transforms-2/files-2.1/83ff841d914e6d5d48b78075c96b0c54/res/values-ka/values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "201",
+                        "endOffsets": "448"
                     },
                     "to": {
-                        "startLines": "38",
+                        "startLines": "27",
                         "startColumns": "4",
-                        "startOffsets": "4668",
-                        "endColumns": "100",
-                        "endOffsets": "4764"
+                        "startOffsets": "3046",
+                        "endColumns": "201",
+                        "endOffsets": "3243"
                     }
                 }
             ]

@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content">
 
             <LinearLayout
+                    android:id="@+id/linWorkout"
                     android:padding="25dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -46,6 +47,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                        android:id="@+id/lin_btn_holder_add_exercise"
                         android:padding="25dp"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -69,12 +71,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"/>
 
-                <Button
-                    android:id="@+id/btnTestLoad"
-                    android:text="@string/testload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                <!--<Button-->
+                    <!--android:id="@+id/btnTestLoad"-->
+                    <!--android:text="@string/testload"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"/>-->
 
             </LinearLayout>
         </ScrollView>
