@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context="com.example.squale.liftingtracker.UserStatistics"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_bar_overlay"/>
+
+
+    <TextView
+        android:id="@+id/tvYourStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/your_statistics"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvPR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Personal Records:"
+        android:layout_gravity="center"
+        android:textSize="24sp"
+        tools:text="Personal Records:" />
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="77dp"
+            tools:layout_editor_absoluteX="16dp">
+
+        <Button
+                android:id="@+id/bCalculator"
+                android:layout_width="0dp"
+                android:layout_height="63dp"
+                android:text="Calculator"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="36dp"/>
+
+        <TextView
+                android:id="@+id/tvThirdNum"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:text="First PR"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/tvSecondNum"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1"
+                app:layout_constraintStart_toEndOf="@+id/tvThirdPR"
+                android:layout_marginEnd="88dp" android:layout_marginRight="88dp"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                android:id="@+id/tvFirstPR"
+                android:layout_width="63dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="72dp"
+                android:layout_marginRight="72dp"
+                android:layout_marginBottom="8dp"
+                android:text="Bench"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvFirstNum"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintLeft_toLeftOf="@+id/tvSecondPR"
+                app:layout_constraintRight_toRightOf="@+id/tvSecondPR"
+                app:layout_constraintStart_toStartOf="@+id/tvSecondPR"
+                app:layout_constraintTop_toTopOf="@+id/tvFirstNum"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1" app:layout_constraintBottom_toTopOf="@+id/tvSecondNum"/>
+
+        <TextView
+                android:id="@+id/tvThirdPR"
+                android:layout_width="89dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="37dp"
+                android:layout_marginRight="37dp"
+                android:text="Squats"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvThirdNum"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvThirdNum"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintTop_creator="1" android:layout_marginLeft="34dp"
+                android:layout_marginStart="34dp" app:layout_constraintBottom_toBottomOf="@+id/tvThirdNum"
+                android:layout_marginBottom="8dp" app:layout_constraintVertical_bias="0.0"/>
+
+        <TextView
+                android:id="@+id/tvSecondPR"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="8dp"
+                android:text="DeadLift"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSecondNum"
+                app:layout_constraintTop_toBottomOf="@+id/tvFirstPR"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintTop_creator="1" app:layout_constraintVertical_bias="0.619"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"/>
+
+        <TextView
+                android:id="@+id/tvFirstNum"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:text="First PR"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintRight_creator="1"
+                app:layout_constraintRight_toRightOf="@+id/tvSecondNum"
+                android:layout_marginTop="68dp"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/tvSecondNum"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/tvSecondNum"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:text="First PR"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvThirdNum"
+                app:layout_constraintLeft_toLeftOf="@+id/tvThirdNum"
+                app:layout_constraintStart_toStartOf="@+id/tvThirdNum"
+                app:layout_constraintTop_toBottomOf="@+id/tvFirstNum"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintTop_creator="1" app:layout_constraintHorizontal_bias="0.0"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>
