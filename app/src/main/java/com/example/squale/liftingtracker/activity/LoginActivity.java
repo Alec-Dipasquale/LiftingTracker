@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker;
+package com.example.squale.liftingtracker.activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,8 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 
-import com.example.squale.liftingtracker.activity.HomeActivity;
-import com.example.squale.liftingtracker.activity.RegisterActivity;
+import com.example.squale.liftingtracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +30,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //initiating Firebase Auth Object
-        mAuth = FirebaseAuth.getInstance();
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        checkLoggedIn();
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -55,6 +54,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void checkLoggedIn(){
+        if(firebaseAuth.getCurrentUser()!= null){
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        }
+    }
+
     private void login(){
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
@@ -69,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -79,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Toast.makeText(LoginActivity.this, "Login Successful.",
                                     Toast.LENGTH_LONG).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
                             if(user.isEmailVerified())
                             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             else

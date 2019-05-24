@@ -12,7 +12,6 @@ import android.widget.Toast;
 import android.text.TextUtils;
 
 
-import com.example.squale.liftingtracker.LoginActivity;
 import com.example.squale.liftingtracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

@@ -28,11 +28,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class DayActivity extends AppCompatActivity{
+public class WorkoutActivity extends AppCompatActivity{
 
     //Local Variables
 
-    public static final String TAG = "DayActivity";
+    public static final String TAG = "WorkoutActivity";
 
     private int count = 0;
 
@@ -65,7 +65,7 @@ public class DayActivity extends AppCompatActivity{
         final LinearLayout llAddExercise = findViewById(R.id.lin_btn_holder_add_exercise);
         final LinearLayout llWorkout = findViewById(R.id.linWorkout);
         final Workout workout = new Workout();
-        workout.setUp(stringDate, bAddExercise, llExercise, DayActivity.this);
+        workout.setUp(stringDate, bAddExercise, llExercise, WorkoutActivity.this);
 
 
         final Button bFinish = findViewById(R.id.btnFinish);
@@ -77,6 +77,7 @@ public class DayActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Log.d(TAG, "finish clicked!");
                 workout.makeNonEditable(llWorkout, bFinish, llAddExercise, bAddExercise);
+                workout.sendCurrentToDatabase();
 
 //
 //                try {
@@ -97,7 +98,7 @@ public class DayActivity extends AppCompatActivity{
             }
         });
 
-        appOverlay.optionsAction(DayActivity.this);
+        appOverlay.optionsAction(WorkoutActivity.this);
 
         createCalendar();
 
@@ -148,7 +149,7 @@ public class DayActivity extends AppCompatActivity{
                     //tempLinearLayout.addView();
                 }
             }
-            Toast.makeText(DayActivity.this, "File added " + day + "-" + month + "-" + year + ".txt", Toast.LENGTH_LONG).show();
+            Toast.makeText(WorkoutActivity.this, "File added " + day + "-" + month + "-" + year + ".txt", Toast.LENGTH_LONG).show();
         } catch(FileNotFoundException e){
             e.printStackTrace();
         }catch(IOException e){
@@ -177,7 +178,7 @@ public class DayActivity extends AppCompatActivity{
                 sb.append(text).append("\n");
             }
 
-            Toast.makeText(DayActivity.this, sb.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(WorkoutActivity.this, sb.toString(), Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         } catch (IOException e ) {
@@ -235,7 +236,7 @@ public class DayActivity extends AppCompatActivity{
                 month = mCurrentDate.get(Calendar.MONTH);
                 day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog mDatePicker = new DatePickerDialog(DayActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog mDatePicker = new DatePickerDialog(WorkoutActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                         selectedMonth++;

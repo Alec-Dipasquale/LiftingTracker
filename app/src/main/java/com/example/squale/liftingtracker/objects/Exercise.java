@@ -17,6 +17,7 @@ import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static android.view.Gravity.END;
 import static android.view.Gravity.FILL;
@@ -130,7 +131,8 @@ public class Exercise implements Serializable {
 
 
     public void makeNonEditable(){
-        for(Set set : arrSet){
+        for(int i = arrSet.size()-1; i>=0; i--){
+            Set set = arrSet.get(i);
             set.makeNonEditable();
             if(TextUtils.isEmpty(set.getReps())){
                 arrSet.remove(set);

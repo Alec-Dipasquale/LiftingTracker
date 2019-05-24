@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.squale.liftingtracker.AppOverlay;
-import com.example.squale.liftingtracker.LoginActivity;
 import com.example.squale.liftingtracker.R;
 import com.example.squale.liftingtracker.UserStatistics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // On Click Actions
         private void startDayView(){
-            Intent dayViewIntent = new Intent(HomeActivity.this, DayActivity.class);
+            Intent dayViewIntent = new Intent(HomeActivity.this, WorkoutActivity.class);
             HomeActivity.this.startActivity(dayViewIntent);
         }
         private void startUserStatistics(){

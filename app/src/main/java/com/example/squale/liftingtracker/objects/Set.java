@@ -2,6 +2,8 @@ package com.example.squale.liftingtracker.objects;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.renderscript.ScriptGroup;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -60,10 +62,12 @@ public class Set implements Serializable {
         etWeight.setLayoutParams(layoutParams);
         etWeight.setHint("Weight");
         etWeight.setPadding(50,20,50,20);
+        etWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         etReps.setLayoutParams(layoutParams);
         etReps.setHint("Reps");
         etReps.setPadding(50,20,50,20);
+        etReps.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         tvSetsCount.setText(String.format("%d", count));
         tvSetsCount.setTextColor(Color.BLACK);
