@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:306556255694:android:cf5a1386a4e5c783",
         "android_client_info": {
-          "package_name": "com.example.squale.liftingtracker"
+          "package_name": "com.squale.liftingtracker"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "306556255694-cg96kq5uelbm3qo6l3hqi9bc1flki6hs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.squale.liftingtracker",
+            "package_name": "com.squale.liftingtracker",
             "certificate_hash": "5f14a8f9cffc7534f9c44f73ca1445edae25804a"
           }
         },

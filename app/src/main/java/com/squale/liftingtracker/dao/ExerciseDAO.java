@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker.dao;
+package com.squale.liftingtracker.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.squale.liftingtracker.objects.Workout;
-import com.example.squale.liftingtracker.objects.Exercise;
+import com.squale.liftingtracker.models.Workout;
+import com.squale.liftingtracker.models.Exercise;
 
 public class ExerciseDAO {
     public static final String TAG = "ExerciseDAO";
@@ -21,8 +21,8 @@ public class ExerciseDAO {
     // Database fields
     private SQLiteDatabase database;
     private DatabaseHelperWorkout databaseHelper;
-    private String[] mAllColumns = { DatabaseHelperWorkout.COL_EXERCISE_ID,
-            DatabaseHelperWorkout.COL_EXERCISE_NAME, DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID };
+    private String[] mAllColumns = {DatabaseHelperWorkout.COL_EXERCISE_ID,
+            DatabaseHelperWorkout.COL_EXERCISE_NAME, DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID};
 
     public ExerciseDAO(Context context) {
         databaseHelper = new DatabaseHelperWorkout(context);
@@ -88,7 +88,7 @@ public class ExerciseDAO {
 
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
                 DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
-                new String[] { String.valueOf(workoutId) }, null, null, null);
+                new String[]{String.valueOf(workoutId)}, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -104,7 +104,7 @@ public class ExerciseDAO {
     public Exercise getExerciseById(long id) {
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, mAllColumns,
                 DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
-                new String[] { String.valueOf(id) }, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }

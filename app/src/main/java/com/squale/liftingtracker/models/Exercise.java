@@ -1,7 +1,8 @@
-package com.example.squale.liftingtracker.objects;
+package com.squale.liftingtracker.models;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
@@ -11,13 +12,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.squale.liftingtracker.R;
-
-import org.w3c.dom.Text;
+import com.squale.liftingtracker.R;
+import com.squale.liftingtracker.dao.ExerciseDAO;
+import com.squale.liftingtracker.dao.WorkoutDAO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import static android.view.Gravity.END;
 import static android.view.Gravity.FILL;
@@ -39,11 +39,11 @@ public class Exercise implements Serializable {
     private TextView tvExerciseCount;
     private Context context;
     private LinearLayout linearLayoutAddedTo;
-    private ArrayList<Set>  arrSet = new ArrayList<>();
+    private ArrayList<Set> arrSet = new ArrayList<>();
 
 
-
-    public Exercise(){}
+    public Exercise() {
+    }
 
     public Exercise(long id, String name, Workout workout) {
         this.id = id;
@@ -51,7 +51,7 @@ public class Exercise implements Serializable {
         this.workout = workout;
     }
 
-    public void setUp(int count , LinearLayout linearLayoutAddedTo, Context context, View view) {
+    public void setUp(int count, LinearLayout linearLayoutAddedTo, Context context, View view) {
         this.context = context;
         this.llAddExercise = new LinearLayout(context);
         this.llTitleBar = new LinearLayout(context);
@@ -66,7 +66,7 @@ public class Exercise implements Serializable {
         llAddExercise.setOrientation(LinearLayout.VERTICAL);
         llAddExercise.setGravity(View.FOCUS_LEFT);
         llAddExercise.setPadding(5, 25, 5, 25);
-        llAddExercise.setElevation(500* view.getContext().getResources().getDisplayMetrics().density);
+        llAddExercise.setElevation(500 * view.getContext().getResources().getDisplayMetrics().density);
         llAddExercise.setId(View.generateViewId());
 
 
@@ -74,7 +74,7 @@ public class Exercise implements Serializable {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         llTitleBar.setOrientation(LinearLayout.HORIZONTAL);
         llTitleBar.setGravity(FILL);
-        llTitleBar.setBackgroundColor(view.getContext().getResources().getColor(R.color.colorPrimary));
+        llTitleBar.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
         llTitleBar.setId(View.generateViewId());
 
 
@@ -112,7 +112,7 @@ public class Exercise implements Serializable {
         btnAddSet.setId(View.generateViewId());
 
         Set set = new Set();
-        set.setUp(arrSet.size()+1, llSetsList,context,btnAddSet);
+        set.setUp(arrSet.size() + 1, llSetsList, context, btnAddSet);
         arrSet.add(set);
 
         llAddExercise.addView(llTitleBar);
@@ -129,16 +129,24 @@ public class Exercise implements Serializable {
         linearLayoutAddedTo.addView(llAddExercise);
     }
 
+    public void sendCurrentToDatabase() {
+        WorkoutDAO workoutDAO = new WorkoutDAO(context);
+        ExerciseDAO exerciseDAO = new ExerciseDAO(context);
+        if (!TextUtils.isEmpty(this.name)) {
+            exerciseDAO.createExercise(this.name, this.workout.getId());
+        }
+    }
 
-    public void makeNonEditable(){
-        for(int i = arrSet.size()-1; i>=0; i--){
+
+    public void makeNonEditable() {
+        for (int i = arrSet.size() - 1; i >= 0; i--) {
             Set set = arrSet.get(i);
             set.makeNonEditable();
-            if(TextUtils.isEmpty(set.getReps())){
+            if (TextUtils.isEmpty(set.getReps())) {
                 arrSet.remove(set);
             }
         }
-        if(arrSet.isEmpty() && TextUtils.isEmpty(etExerciseName.getText().toString())){
+        if (arrSet.isEmpty() && TextUtils.isEmpty(etExerciseName.getText().toString())) {
             linearLayoutAddedTo.removeView(llAddExercise);
         }
         etExerciseName.setEnabled(false);
@@ -146,24 +154,24 @@ public class Exercise implements Serializable {
     }
 
     public void makeEditable() {
-        for(Set set : arrSet){
+        for (Set set : arrSet) {
             set.makeEditable();
         }
         etExerciseName.setEnabled(true);
         llSetButton.addView(btnAddSet);
     }
 
-    class addSetClick implements View.OnClickListener{
+    class addSetClick implements View.OnClickListener {
         @Override
-        public void onClick(View view){
+        public void onClick(View view) {
             Set set = new Set();
-            set.setUp(arrSet.size()+1 , llSetsList,context,btnAddSet);
+            set.setUp(arrSet.size() + 1, llSetsList, context, btnAddSet);
             arrSet.add(set);
 
         }
     }
 
-    public String getExerciseInfoString(){
+    public String getExerciseInfoString() {
         return getExerciseCount() + "\t" + getExercise() + '\n' + getSetsInfoString();
     }
 
@@ -171,17 +179,17 @@ public class Exercise implements Serializable {
         return "e" + tvExerciseCount.getText().toString();
     }
 
-    public String getSetsInfoString(){
+    public String getSetsInfoString() {
         Set object = this.arrSet.get(0);
         StringBuilder sb = new StringBuilder(object.getSetInfoString());
-        for(int i = 1; i<this.arrSet.size(); i++){
+        for (int i = 1; i < this.arrSet.size(); i++) {
             object = this.arrSet.get(i);
             sb.append("\t").append(object.getSetInfoString());
         }
         return sb.toString();
     }
 
-    public String getExercise(){
+    public String getExercise() {
         return this.etExerciseName.getText().toString();
     }
 
@@ -209,7 +217,7 @@ public class Exercise implements Serializable {
         this.workout = workout;
     }
 
-    public int getSetsCount(){
+    public int getSetsCount() {
         return arrSet.size();
     }
 }

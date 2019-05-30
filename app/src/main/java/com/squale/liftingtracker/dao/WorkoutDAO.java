@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker.dao;
+package com.squale.liftingtracker.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.squale.liftingtracker.objects.Workout;
-import com.example.squale.liftingtracker.objects.Exercise;
+import com.squale.liftingtracker.models.Workout;
+import com.squale.liftingtracker.models.Exercise;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,32 +25,32 @@ public class WorkoutDAO {
     private String[] allColumns = {
             DatabaseHelperWorkout.COL_WORKOUT_ID, DatabaseHelperWorkout.COL_WORKOUT_DATE};
 
-    public WorkoutDAO(Context context){
+    public WorkoutDAO(Context context) {
         this.context = context;
         databaseHelperWorkout = new DatabaseHelperWorkout(context);
         //open database
-        try{
+        try {
             open();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             Log.e(TAG, "SQLException on opening database " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    public void open() throws SQLException{
+    public void open() throws SQLException {
         database = databaseHelperWorkout.getWritableDatabase();
     }
 
-    public void close(){
+    public void close() {
         databaseHelperWorkout.close();
     }
 
-    public Workout createWorkout(String date){
+    public Workout createWorkout(String date) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelperWorkout.COL_WORKOUT_DATE, date);
         long insertId =
                 database.insert(DatabaseHelperWorkout.TABLE_WORKOUT, null, values);
-        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT,  allColumns,
+        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, allColumns,
                 DatabaseHelperWorkout.COL_WORKOUT_ID + " = " + insertId,
                 null, null, null, null);
         cursor.moveToFirst();
@@ -59,13 +59,13 @@ public class WorkoutDAO {
         return newWorkout;
     }
 
-    public void deletWorkout(Workout workout){
+    public void deleteWorkout(Workout workout) {
         long id = workout.getId();
         // delete all exercises of this workout
         ExerciseDAO exerciseDAO = new ExerciseDAO(context);
         List<Exercise> listExercises = exerciseDAO.getExercisesOfWorkout(id);
-        if(listExercises != null && !listExercises.isEmpty()){
-            for(Exercise e : listExercises) {
+        if (listExercises != null && !listExercises.isEmpty()) {
+            for (Exercise e : listExercises) {
                 exerciseDAO.deleteExercise(e);
             }
         }
@@ -97,11 +97,20 @@ public class WorkoutDAO {
     public Workout getWorkoutById(long id) {
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, allColumns,
                 DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
-                new String[] { String.valueOf(id) }, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
         return cursorToWorkout(cursor);
+    }
+
+
+    public long getItemID(String date) {
+        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, allColumns,
+                DatabaseHelperWorkout.COL_WORKOUT_DATE + " = ?",
+                new String[]{String.valueOf(date)}, null, null, null);
+        long id = cursor.getColumnIndex(DatabaseHelperWorkout.COL_WORKOUT_ID);
+        return id;
     }
 
     protected Workout cursorToWorkout(Cursor cursor) {

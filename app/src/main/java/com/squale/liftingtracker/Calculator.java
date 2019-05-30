@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker;
+package com.squale.liftingtracker;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 public class Calculator extends AppCompatActivity {
-
-
-
 
 
     @Override
@@ -31,7 +29,6 @@ public class Calculator extends AppCompatActivity {
                 calcIntent.putExtra("reps", reps);
                 calcIntent.putExtra("weight", weight);
                 Calculator.this.startActivity(calcIntent);
-
 
 
             }

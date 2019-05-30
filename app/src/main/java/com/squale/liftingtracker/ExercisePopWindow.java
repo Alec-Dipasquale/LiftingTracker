@@ -1,7 +1,8 @@
-package com.example.squale.liftingtracker;
+package com.squale.liftingtracker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 
 public class ExercisePopWindow extends AppCompatActivity {
 

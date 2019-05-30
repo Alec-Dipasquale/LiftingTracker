@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker.dao;
+package com.squale.liftingtracker.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,7 +39,7 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
             + ");";
 
     private static final String SQL_CREATE_TABLE_EXERCISES = "CREATE TABLE " + TABLE_EXERCISE
-            + "(" +  COL_EXERCISE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "(" + COL_EXERCISE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_EXERCISE_NAME + " TEXT NOT NULL, "
             + COL_EXERCISE_WORKOUT_ID + " INTEGER NOT NULL "
             + ");";
@@ -49,21 +49,21 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
             + COL_WORKOUT_DATE + " TEXT NOT NULL"
             + ");";
 
-    public DatabaseHelperWorkout(Context context){
+    public DatabaseHelperWorkout(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase database){
+    public void onCreate(SQLiteDatabase database) {
         database.execSQL(SQL_CREATE_TABLE_WORKOUT);
         database.execSQL(SQL_CREATE_TABLE_EXERCISES);
         database.execSQL(SQL_CREATE_TABLE_SETS);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion){
+    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         Log.w(TAG,
-                "Upgrading the database from version " + oldVersion +" to "+ newVersion);
+                "Upgrading the database from version " + oldVersion + " to " + newVersion);
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKOUT);
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISE);
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_SET);
@@ -71,23 +71,6 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
         onCreate(database);
     }
 
-//
-//    public DatabaseHelperWorkout(Context context){
-//        super(context, TABLE_NAME, null, 1);
-//    }
-//
-//    @Override
-//    public void onCreate(SQLiteDatabase db) {
-//        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                COL2 + " TEXT)";
-//        db.execSQL(createTable);
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-//        onCreate(db);
-//    }
 //
 //    public boolean addData(String item){
 //        SQLiteDatabase db = this.getWritableDatabase();

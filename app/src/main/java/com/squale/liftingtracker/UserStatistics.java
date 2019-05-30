@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker;
+package com.squale.liftingtracker;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.squale.liftingtracker.activity.LoginActivity;
+import com.squale.liftingtracker.activity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -41,7 +41,7 @@ public class UserStatistics extends AppCompatActivity {
         //final Button btnAllPRs = (Button) findViewById(R.id.btnAllPRs);
 
 
-        if(firebaseAuth.getCurrentUser() == null){
+        if (firebaseAuth.getCurrentUser() == null) {
             //closing this activity
             finish();
             //starting login activity
@@ -69,7 +69,7 @@ public class UserStatistics extends AppCompatActivity {
 
     }
 
-    private void openSettings(){
+    private void openSettings() {
         Intent settingsPopIntent = new Intent(UserStatistics.this, AppOverlay.class);
         UserStatistics.this.startActivity(settingsPopIntent);
     }

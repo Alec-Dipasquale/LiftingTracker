@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker;
+package com.squale.liftingtracker;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.squale.liftingtracker.activity.LoginActivity;
+import com.squale.liftingtracker.activity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AppOverlay extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class AppOverlay extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.5),(int)(height*.4));
+        getWindow().setLayout((int) (width * .5), (int) (height * .4));
 
         Button btnLogOutLink = (Button) findViewById(R.id.bLogOut);
         Button btnSettings = (Button) findViewById(R.id.bSettings);
@@ -46,19 +46,22 @@ public class AppOverlay extends AppCompatActivity {
         });
 
     }
-    private void signOutAction(){
+
+    private void signOutAction() {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(AppOverlay.this, LoginActivity.class));
     }
-    private void settingsAction(){
+
+    private void settingsAction() {
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Doesn't do shit yet dumby", Toast.LENGTH_LONG);
         toast.show();
     }
-    public void optionsAction(final Context activity){
-        View rootView = ((Activity)activity).getWindow().getDecorView().findViewById(
+
+    public void optionsAction(final Context activity) {
+        View rootView = ((Activity) activity).getWindow().getDecorView().findViewById(
                 android.R.id.content);
-        ImageButton btnOptions =  (ImageButton) rootView.findViewById(R.id.bSettings);
+        ImageButton btnOptions = (ImageButton) rootView.findViewById(R.id.bSettings);
         btnOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

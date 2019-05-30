@@ -1,4 +1,4 @@
-package com.example.squale.liftingtracker.dao;
+package com.squale.liftingtracker.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.squale.liftingtracker.objects.Exercise;
-import com.example.squale.liftingtracker.objects.Set;
+import com.squale.liftingtracker.models.Exercise;
+import com.squale.liftingtracker.models.Set;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,9 @@ public class SetDAO {
     // Database fields
     private SQLiteDatabase database;
     private DatabaseHelperWorkout databaseHelper;
-    private String[] mAllColumns = { DatabaseHelperWorkout.COL_SET_ID,
+    private String[] mAllColumns = {DatabaseHelperWorkout.COL_SET_ID,
             DatabaseHelperWorkout.COL_SET_WEIGHT, DatabaseHelperWorkout.COL_SET_REPS,
-            DatabaseHelperWorkout.COL_SET_EXERCISE_ID };
+            DatabaseHelperWorkout.COL_SET_EXERCISE_ID};
 
     public SetDAO(Context context) {
         databaseHelper = new DatabaseHelperWorkout(context);
@@ -90,7 +90,7 @@ public class SetDAO {
 
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_SET, mAllColumns,
                 DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
-                new String[] { String.valueOf(exerciseId) }, null, null, null);
+                new String[]{String.valueOf(exerciseId)}, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
