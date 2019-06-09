@@ -4,10 +4,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squale.liftingtracker.dao.SetDAO;
+import com.squale.liftingtracker.models.Exercise;
+import com.squale.liftingtracker.models.Set;
 
 import java.util.Locale;
 
@@ -20,9 +25,11 @@ public class SetSetup {
     private LinearLayout mAddSetLinearLayout;
     private EditText mEtReps;
     private EditText mEtWeight;
+    private Context mContext;
     private int mCount = 0;
 
     public SetSetup( int count, LinearLayout addSetLinearLayout, Context context) {
+        this.mContext = context;
         this.mAddSetLinearLayout = addSetLinearLayout;
         this.mCount = count;
         mSetAddedToLinearLayout = new LinearLayout(context);
@@ -62,6 +69,15 @@ public class SetSetup {
         this.mAddSetLinearLayout.addView(mSetAddedToLinearLayout);
     }
 
+    public void sendCurrentToDatabase(Exercise exercise){
+        SetDAO setDAO = new SetDAO(this.mContext);
+        if(!TextUtils.isEmpty(this.getReps())|| !TextUtils.isEmpty(this.getWeight())){
+            Log.d(TAG, "exercise ID: " + exercise.getId());
+            Set createSet = setDAO.createSet(
+                    this.getWeight(), this.getReps(), exercise.getId());
+        }
+    }
+
     public void makeNonEditable() {
         if (TextUtils.isEmpty(mEtReps.getText().toString()) || TextUtils.isEmpty(mEtWeight.getText().toString())) {
             delete();
@@ -83,16 +99,16 @@ public class SetSetup {
         this.mAddSetLinearLayout.removeView(mSetAddedToLinearLayout);
     }
 
-    public int getReps() {
-        return Integer.parseInt(mEtReps.getText().toString());
+    public String getReps() {
+        return this.mEtReps.getText().toString();
     }
 
     public void setReps(int x) {
         this.mEtReps.setText(String.format(Locale.US, "%d" , x));
     }
 
-    public int getWeight() {
-        return Integer.parseInt(mEtWeight.getText().toString());
+    public String getWeight() {
+        return this.mEtWeight.getText().toString();
     }
 
     public void setWeight(int x) {

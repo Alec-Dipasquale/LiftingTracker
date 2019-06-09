@@ -32,7 +32,7 @@ public class SetDAO {
         try {
             open();
         } catch (SQLException e) {
-            Log.e(TAG, "SQLException on openning database " + e.getMessage());
+            Log.e(TAG, "SQLException on opening database " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -53,22 +53,22 @@ public class SetDAO {
         long insertId = database
                 .insert(DatabaseHelperWorkout.TABLE_SET, null, values);
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_SET, mAllColumns,
-                DatabaseHelperWorkout.COL_SET_EXERCISE_ID + " = " + insertId, null, null,
-                null, null);
+                DatabaseHelperWorkout.COL_SET_ID + " = " + insertId,
+                null, null,null, null);
         cursor.moveToFirst();
         Set newSet = cursorToSet(cursor);
         cursor.close();
         return newSet;
     }
 
-    public void deleteset(Set set) {
+    public void deleteSet(Set set) {
         long id = set.getId();
         System.out.println("the deleted employee has the id: " + id);
         database.delete(DatabaseHelperWorkout.TABLE_SET, DatabaseHelperWorkout.COL_SET_ID
                 + " = " + id, null);
     }
 
-    public List<Set> getAllsets() {
+    public List<Set> getAllSets() {
         List<Set> listSets = new ArrayList<>();
 
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_SET, mAllColumns,
@@ -89,7 +89,7 @@ public class SetDAO {
         List<Set> listSet = new ArrayList<>();
 
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_SET, mAllColumns,
-                DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
+                DatabaseHelperWorkout.COL_SET_ID + " = ?",
                 new String[]{String.valueOf(exerciseId)}, null, null, null);
 
         cursor.moveToFirst();
@@ -110,9 +110,9 @@ public class SetDAO {
         set.setReps(cursor.getString(2));
 
         // get The company by id
-        long companyId = cursor.getLong(7);
+        long exerciseId = cursor.getLong(3);
         ExerciseDAO dao = new ExerciseDAO(context);
-        Exercise exercise = dao.getExerciseById(companyId);
+        Exercise exercise = dao.getExerciseById(exerciseId);
         if (exercise != null)
             set.setExercise(exercise);
 

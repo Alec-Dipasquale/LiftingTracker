@@ -24,7 +24,7 @@ public class WorkoutSetup {
     private Button mBtnEditWorkout;
     private Context mContext;
 
-    public void make(LinearLayout workoutLayout, Button btnFinish, Context context){
+    public WorkoutSetup(LinearLayout workoutLayout, Button btnFinish, Context context){
         this.mWorkoutLayout = workoutLayout;
         this.mContext = context;
 
@@ -39,17 +39,16 @@ public class WorkoutSetup {
     }
 
     public void sendCurrentToDatabase(String date) {
-        WorkoutDAO workoutDAO = new WorkoutDAO(mContext);
-        Log.d(TAG, "workout added for date: " + date);
-        workoutDAO.createWorkout(date);
-        long workoutId = workoutDAO.getItemID(date);
-        Workout workout = new Workout(workoutId, date);
-        Log.d(TAG, "workout id updated to be " + workoutId);
+        WorkoutDAO workoutDAO = new WorkoutDAO(this.mContext);
+        Workout createdWorkout = workoutDAO.createWorkout(date);
+        Log.d(TAG, "workout added for date: " + createdWorkout.getDate());
+        Log.d(TAG, "workout id updated to be " + createdWorkout.getId());
         for (int i = 0; i < exerciseSetupArrayList.size(); i++) {
             ExerciseSetup exerciseSetup = exerciseSetupArrayList.get(i);
-            exerciseSetup.sendCurrentToDatabase(workout);
+            exerciseSetup.sendCurrentToDatabase(createdWorkout);
         }
-        Log.d(TAG, "date field is empty???");
+        if(TextUtils.isEmpty(date))
+           Log.d(TAG, "date field is empty???");
     }
 
     public void makeNonEditable(final LinearLayout llWorkout, final Button bFinish,

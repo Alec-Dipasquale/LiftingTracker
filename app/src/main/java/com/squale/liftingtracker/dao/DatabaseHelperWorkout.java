@@ -17,13 +17,13 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
 
     //columns of the exercise table
     public static final String TABLE_EXERCISE = "exercises";
-    public static final String COL_EXERCISE_ID = COL_WORKOUT_ID;
+    public static final String COL_EXERCISE_ID = "_id";
     public static final String COL_EXERCISE_NAME = "exercise_name";
     public static final String COL_EXERCISE_WORKOUT_ID = "workout_id";
 
     //columns of the sets table
     public static final String TABLE_SET = "set_table";
-    public static final String COL_SET_ID = COL_EXERCISE_ID;
+    public static final String COL_SET_ID = "_id";
     public static final String COL_SET_WEIGHT = "weight";
     public static final String COL_SET_REPS = "repetitions";
     public static final String COL_SET_EXERCISE_ID = "exercise_id";

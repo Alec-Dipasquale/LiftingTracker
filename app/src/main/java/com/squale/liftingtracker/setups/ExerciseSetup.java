@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import static android.view.Gravity.END;
 import static android.view.Gravity.FILL;
 
 public class ExerciseSetup {
+
+    private static String TAG = "ExerciseSetup";
 
     private LinearLayout mAddedToLinearLayout;
     private LinearLayout mAddExerciseLinearLayout;
@@ -123,11 +126,15 @@ public class ExerciseSetup {
     }
 
     public void sendCurrentToDatabase(Workout workout) {
-        ExerciseDAO exerciseDAO = new ExerciseDAO(mContext);
-        if (!TextUtils.isEmpty(getName())) {
+        ExerciseDAO exerciseDAO = new ExerciseDAO(this.mContext);
+        if (!TextUtils.isEmpty(this.getName())) {
             Exercise createExercise = exerciseDAO.createExercise(
-                    getName(), workout.getId());
+                    this.getName(), workout.getId());
 
+            for (int i = 0; i < mSetSetupArrayList.size(); i++) {
+                SetSetup setSetup = mSetSetupArrayList.get(i);
+                setSetup.sendCurrentToDatabase(createExercise);
+            }
         }
     }
 
@@ -166,7 +173,7 @@ public class ExerciseSetup {
     }
 
     public String getName() {
-        return mEtExerciseName.toString();
+        return this.mEtExerciseName.getText().toString();
     }
     public void setName(String exerciseName) {
         this.mEtExerciseName.setText(exerciseName);

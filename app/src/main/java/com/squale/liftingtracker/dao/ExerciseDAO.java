@@ -51,8 +51,8 @@ public class ExerciseDAO {
         long insertId = database
                 .insert(DatabaseHelperWorkout.TABLE_EXERCISE, null, values);
         Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
-                DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID + " = " + insertId, null, null,
-                null, null);
+                DatabaseHelperWorkout.COL_EXERCISE_ID + " = " + insertId
+                , null, null, null, null);
         cursor.moveToFirst();
         Exercise newExercise = cursorToExercise(cursor);
         cursor.close();
@@ -66,10 +66,10 @@ public class ExerciseDAO {
                 + " = " + id, null);
     }
 
-    public List<Exercise> getAllExercises() {
-        List<Exercise> listExercises = new ArrayList<>();
+        public List<Exercise> getAllExercises() {
+            List<Exercise> listExercises = new ArrayList<>();
 
-        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
+            Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
                 null, null, null, null, null);
 
         cursor.moveToFirst();
@@ -102,8 +102,8 @@ public class ExerciseDAO {
     }
 
     public Exercise getExerciseById(long id) {
-        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, mAllColumns,
-                DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
+        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
+                DatabaseHelperWorkout.COL_EXERCISE_ID + " = ?",
                 new String[]{String.valueOf(id)}, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -117,7 +117,7 @@ public class ExerciseDAO {
         exercise.setName(cursor.getString(1));
 
         // get The company by id
-        long workoutId = cursor.getLong(7);
+        long workoutId = cursor.getLong(2);
         WorkoutDAO dao = new WorkoutDAO(context);
         Workout workout = dao.getWorkoutById(workoutId);
         if (workout != null)

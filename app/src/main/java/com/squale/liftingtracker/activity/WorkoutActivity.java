@@ -15,8 +15,10 @@ import android.widget.TextView;
 
 import com.squale.liftingtracker.AppOverlay;
 import com.squale.liftingtracker.R;
+import com.squale.liftingtracker.dao.WorkoutDAO;
 import com.squale.liftingtracker.models.Workout;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
+import com.squale.liftingtracker.setups.WorkoutSetup;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,20 +29,19 @@ public class WorkoutActivity extends AppCompatActivity {
 
     public static final String TAG = "WorkoutActivity";
 
-    private int count = 0;
 
     private TextView mDateEditText;
     private Calendar mCurrentDate;
     private Bitmap mGeneratedDateIcon;
-    private ImageGenerator mImageGenerator;
     private ImageView mDisplayGeneratedImage;
-    private ArrayList<LinearLayout> horizontalSetsLayoutArrayList = new ArrayList<>();
-    private final int horizontalSetsLayoutID = 20000;
+    private ImageGenerator mImageGenerator;
 
     private int day;
     private int month;
     private int year;
     private String stringDate;
+
+    private WorkoutDAO mWorkoutDAO;
 
 
     @Override
@@ -52,9 +53,7 @@ public class WorkoutActivity extends AppCompatActivity {
         LinearLayout llExercise = findViewById(R.id.linAddExercise);
         final LinearLayout llAddExercise = findViewById(R.id.lin_btn_holder_add_exercise);
         final LinearLayout llWorkout = findViewById(R.id.linWorkout);
-        final Workout workout = new Workout();
-        workout.setUp(stringDate, bAddExercise, llExercise, WorkoutActivity.this);
-
+        final WorkoutSetup workoutSetup = new WorkoutSetup(llExercise, bAddExercise, this);
 
         final Button bFinish = findViewById(R.id.btnFinish);
         //Button bTestLoad = findViewById(R.id.btnTestLoad);
@@ -64,15 +63,15 @@ public class WorkoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "finish clicked!");
-                workout.makeNonEditable(llWorkout, bFinish, llAddExercise, bAddExercise);
-                workout.sendCurrentToDatabase();
+                workoutSetup.makeNonEditable(llWorkout, bFinish, llAddExercise, bAddExercise);
+                workoutSetup.sendCurrentToDatabase(stringDate);
 
             }
         });
 
         appOverlay.optionsAction(WorkoutActivity.this);
-
         createCalendar();
+
 
     }
 
