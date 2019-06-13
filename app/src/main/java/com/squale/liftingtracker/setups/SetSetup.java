@@ -70,11 +70,16 @@ public class SetSetup {
     }
 
     public void sendCurrentToDatabase(Exercise exercise){
+
+        Set createdSet;
+
         SetDAO setDAO = new SetDAO(this.mContext);
         if(!TextUtils.isEmpty(this.getReps())|| !TextUtils.isEmpty(this.getWeight())){
-            Log.d(TAG, "exercise ID: " + exercise.getId());
-            Set createSet = setDAO.createSet(
-                    this.getWeight(), this.getReps(), exercise.getId());
+            createdSet = new Set(-1, this.getWeight(), this.getReps(), exercise);
+            long id = setDAO.createSet(createdSet);
+            if(id>0){
+                createdSet.setId(id);
+            }
         }
     }
 

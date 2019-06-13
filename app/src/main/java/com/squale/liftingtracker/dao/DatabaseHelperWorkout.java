@@ -9,6 +9,8 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
 
     public static final String TAG = "DataBaseHelperWorkout";
 
+    private static DatabaseHelperWorkout databaseHelperWorkout;
+
 
     //columns of the workout table
     public static final String TABLE_WORKOUT = "workout";
@@ -28,7 +30,7 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
     public static final String COL_SET_REPS = "repetitions";
     public static final String COL_SET_EXERCISE_ID = "exercise_id";
 
-    private static final String DATABASE_NAME = "workout.db";
+    private static final String DATABASE_NAME = "workout-db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String SQL_CREATE_TABLE_SETS = "CREATE TABLE " + TABLE_SET
@@ -51,13 +53,25 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
 
     public DatabaseHelperWorkout(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        Log.d(TAG, "DatabaseHelperWorkout");
+    }
+
+    public static DatabaseHelperWorkout getInstance(Context context) {
+        if(databaseHelperWorkout==null){
+            synchronized (DatabaseHelperWorkout.class) {
+                if(databaseHelperWorkout==null)
+                    databaseHelperWorkout = new DatabaseHelperWorkout(context);
+            }
+        }
+        return databaseHelperWorkout;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase database) {
+    public void onCreate(SQLiteDatabase database){
         database.execSQL(SQL_CREATE_TABLE_WORKOUT);
         database.execSQL(SQL_CREATE_TABLE_EXERCISES);
         database.execSQL(SQL_CREATE_TABLE_SETS);
+        Log.d(TAG, "onCreate");
     }
 
     @Override
@@ -71,78 +85,11 @@ public class DatabaseHelperWorkout extends SQLiteOpenHelper {
         onCreate(database);
     }
 
-//
-//    public boolean addData(String item){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(COL2, item);
-//
-//        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
-//
-//        long result = db.insert(TABLE_NAME, null, contentValues);
-//        if(result == -1){
-//            return false;
-//        }
-//        else{
-//            return true;
-//        }
-//    }
-//
-//
-//
-//    /**
-//     * Returns all the data from database
-//     * @return
-//     */
-//    public Cursor getData(){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String query = "SELECT * FROM " + TABLE_NAME;
-//        Cursor data = db.rawQuery(query, null);
-//        return data;
-//    }
-//
-//    /**
-//     * Returns only the ID that matches the name passed in
-//     * @param date
-//     * @return
-//     */
-//    public Cursor getItemID(String date){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
-//                " WHERE " + COL2 + " = '" + date + "'";
-//        Cursor data = db.rawQuery(query, null);
-//        return data;
-//    }
-//
-//    /**
-//     * Updates the name field
-//     * @param newDate
-//     * @param id
-//     * @param oldDate
-//     */
-//    public void updateName(String newDate, int id, String oldDate){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
-//                " = '" + newDate + "' WHERE " + COL1 + " = '" + id + "'" +
-//                " AND " + COL2 + " = '" + oldDate + "'";
-//        Log.d(TAG, "updateName: query: " + query);
-//        Log.d(TAG, "updateName: Setting name to " + newDate);
-//        db.execSQL(query);
-//    }
-//
-//    /**
-//     * Delete from database
-//     * @param id
-//     * @param date
-//     */
-//    public void deleteName(int id, String date){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-//                + COL1 + " = '" + id + "'" +
-//                " AND " + COL2 + " = '" + date + "'";
-//        Log.d(TAG, "deleteName: query: " + query);
-//        Log.d(TAG, "deleteName: Deleting " + date + " from database.");
-//        db.execSQL(query);
-//    }
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
 
+        //enable foreign key constraints like ON UPDATE CASCADE, ON DELETE CASCADE
+        db.execSQL("PRAGMA foreign_keys=ON;");
+    }
 }

@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.squale.liftingtracker.models.Workout;
 import com.squale.liftingtracker.models.Exercise;
@@ -28,35 +30,35 @@ public class WorkoutDAO {
     public WorkoutDAO(Context context) {
         this.context = context;
         databaseHelperWorkout = new DatabaseHelperWorkout(context);
-        //open database
-        try {
-            open();
-        } catch (SQLException e) {
-            Log.e(TAG, "SQLException on opening database " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 
     public void open() throws SQLException {
-        database = databaseHelperWorkout.getWritableDatabase();
+        this.database = this.databaseHelperWorkout.getWritableDatabase();
     }
 
     public void close() {
         databaseHelperWorkout.close();
     }
 
-    public Workout createWorkout(String date) {
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelperWorkout.COL_WORKOUT_DATE, date);
-        long insertId =
-                database.insert(DatabaseHelperWorkout.TABLE_WORKOUT, null, values);
-        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, allColumns,
-                DatabaseHelperWorkout.COL_WORKOUT_ID + " = " + insertId,
-                null, null, null, null);
-        cursor.moveToFirst();
-        Workout newWorkout = cursorToWorkout(cursor);
-        cursor.close();
-        return newWorkout;
+    public long createWorkout(Workout workout){
+
+        long id = -1;
+        DatabaseHelperWorkout databaseHelperWorkout = DatabaseHelperWorkout.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelperWorkout.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelperWorkout.COL_WORKOUT_DATE, workout.getDate());
+
+        try {
+            id = sqLiteDatabase.insertOrThrow(DatabaseHelperWorkout.TABLE_WORKOUT, null, contentValues);
+        } catch (SQLiteException e){
+            Log.e(TAG, "Exception: " + e.getMessage());
+            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return id;
     }
 
     public void deleteWorkout(Workout workout) {
@@ -95,13 +97,39 @@ public class WorkoutDAO {
     }
 
     public Workout getWorkoutById(long id) {
-        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, allColumns,
-                DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
-                new String[]{String.valueOf(id)}, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
+        DatabaseHelperWorkout databaseHelperWorkout = DatabaseHelperWorkout.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelperWorkout.getReadableDatabase();
+
+        Workout workout = null;
+
+        Cursor cursor = null;
+        try{
+            cursor = sqLiteDatabase.query(DatabaseHelperWorkout.TABLE_WORKOUT, null,
+                    DatabaseHelperWorkout.COL_WORKOUT_ID + " = ? ", new String[] {String.valueOf(id)},
+                    null, null, null);
+
+            if(cursor!=null && cursor.moveToFirst()){
+                String date = cursor.getString(cursor.getColumnIndex(DatabaseHelperWorkout.COL_WORKOUT_DATE));
+
+                workout = new Workout(id, date);
+            }
+        } catch (SQLiteException e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if(cursor!=null)
+                cursor.close();
+            sqLiteDatabase.close();
         }
-        return cursorToWorkout(cursor);
+
+        return workout;
+
+//        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_WORKOUT, allColumns,
+//                DatabaseHelperWorkout.COL_WORKOUT_ID + " = ?",
+//                new String[]{String.valueOf(id)}, null, null, null);
+//        if (cursor != null) {
+//            cursor.moveToFirst();
+//        }
+//        return cursorToWorkout(cursor);
     }
 
 
@@ -110,6 +138,7 @@ public class WorkoutDAO {
                 DatabaseHelperWorkout.COL_WORKOUT_DATE + " = ?",
                 new String[]{String.valueOf(date)}, null, null, null);
         long id = cursor.getColumnIndex(DatabaseHelperWorkout.COL_WORKOUT_ID);
+        cursor.close();
         return id;
     }
 

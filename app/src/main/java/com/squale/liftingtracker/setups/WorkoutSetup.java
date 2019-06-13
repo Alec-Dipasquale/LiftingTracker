@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.squale.liftingtracker.dao.WorkoutDAO;
-import com.squale.liftingtracker.models.Exercise;
 import com.squale.liftingtracker.models.Workout;
 
 import java.util.ArrayList;
@@ -39,8 +38,14 @@ public class WorkoutSetup {
     }
 
     public void sendCurrentToDatabase(String date) {
-        WorkoutDAO workoutDAO = new WorkoutDAO(this.mContext);
-        Workout createdWorkout = workoutDAO.createWorkout(date);
+
+        Workout createdWorkout = new Workout(-1, date);
+
+        WorkoutDAO workoutDAO = new WorkoutDAO(mContext);
+        long id = workoutDAO.createWorkout(createdWorkout);
+        if(id>0){
+            createdWorkout.setId(id);
+        }
         Log.d(TAG, "workout added for date: " + createdWorkout.getDate());
         Log.d(TAG, "workout id updated to be " + createdWorkout.getId());
         for (int i = 0; i < exerciseSetupArrayList.size(); i++) {

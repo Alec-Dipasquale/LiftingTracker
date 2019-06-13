@@ -62,7 +62,13 @@ public class Set implements Serializable {
         this.reps = reps;
     }
 
+    public Exercise getExercise() {
+        return exercise;
+    }
+
     public void setExercise(Exercise exercise) {
         this.exercise = exercise;
     }
+
+
 }

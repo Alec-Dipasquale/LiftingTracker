@@ -126,16 +126,23 @@ public class ExerciseSetup {
     }
 
     public void sendCurrentToDatabase(Workout workout) {
-        ExerciseDAO exerciseDAO = new ExerciseDAO(this.mContext);
-        if (!TextUtils.isEmpty(this.getName())) {
-            Exercise createExercise = exerciseDAO.createExercise(
-                    this.getName(), workout.getId());
 
+        Exercise createdExercise;
+        ExerciseDAO exerciseDAO = new ExerciseDAO(this.mContext);
+
+        if (!TextUtils.isEmpty(this.getName())) {
+            createdExercise = new Exercise(-1, this.getName(), workout);
+            Log.d(TAG, "get name is not empty: " + this.getName());
+            long id = exerciseDAO.createExercise(createdExercise);
+            if(id>0){
+                createdExercise.setId(id);
+                Log.d(TAG, "Created Exercise id : " + id);
+            }
             for (int i = 0; i < mSetSetupArrayList.size(); i++) {
-                SetSetup setSetup = mSetSetupArrayList.get(i);
-                setSetup.sendCurrentToDatabase(createExercise);
+                SetSetup setSetup = mSetSetupArrayList.get(i);setSetup.sendCurrentToDatabase(createdExercise);
             }
         }
+
     }
 
     public void delete() {

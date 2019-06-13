@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.squale.liftingtracker.models.Exercise;
 import com.squale.liftingtracker.models.Set;
@@ -45,20 +47,27 @@ public class SetDAO {
         databaseHelper.close();
     }
 
-    public Set createSet(String setWeight, String setReps, long exerciseId) {
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelperWorkout.COL_SET_WEIGHT, setWeight);
-        values.put(DatabaseHelperWorkout.COL_SET_REPS, setReps);
-        values.put(DatabaseHelperWorkout.COL_SET_EXERCISE_ID, exerciseId);
-        long insertId = database
-                .insert(DatabaseHelperWorkout.TABLE_SET, null, values);
-        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_SET, mAllColumns,
-                DatabaseHelperWorkout.COL_SET_ID + " = " + insertId,
-                null, null,null, null);
-        cursor.moveToFirst();
-        Set newSet = cursorToSet(cursor);
-        cursor.close();
-        return newSet;
+    public long createSet(Set set) {
+
+        long id = -1;
+        DatabaseHelperWorkout databaseHelperWorkout = DatabaseHelperWorkout.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelperWorkout.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelperWorkout.COL_SET_WEIGHT, set.getWeight());
+        contentValues.put(DatabaseHelperWorkout.COL_SET_REPS, set.getReps());
+        contentValues.put(DatabaseHelperWorkout.COL_SET_EXERCISE_ID, set.getExercise().getId());
+
+        try {
+            id = sqLiteDatabase.insertOrThrow(DatabaseHelperWorkout.TABLE_SET,  null, contentValues);
+        } catch (SQLiteException e){
+            Log.e(TAG, "Exception: " + e.getMessage());
+            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return id;
     }
 
     public void deleteSet(Set set) {

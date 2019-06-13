@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.squale.liftingtracker.AppOverlay;
 import com.squale.liftingtracker.R;
+import com.squale.liftingtracker.dao.DatabaseHelperWorkout;
 import com.squale.liftingtracker.dao.WorkoutDAO;
 import com.squale.liftingtracker.models.Workout;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
@@ -42,6 +43,7 @@ public class WorkoutActivity extends AppCompatActivity {
     private String stringDate;
 
     private WorkoutDAO mWorkoutDAO;
+    private DatabaseHelperWorkout databaseHelperWorkout;
 
 
     @Override
@@ -53,18 +55,24 @@ public class WorkoutActivity extends AppCompatActivity {
         LinearLayout llExercise = findViewById(R.id.linAddExercise);
         final LinearLayout llAddExercise = findViewById(R.id.lin_btn_holder_add_exercise);
         final LinearLayout llWorkout = findViewById(R.id.linWorkout);
-        final WorkoutSetup workoutSetup = new WorkoutSetup(llExercise, bAddExercise, this);
+        final WorkoutSetup workoutSetup = new WorkoutSetup(llExercise, bAddExercise, WorkoutActivity.this);
 
         final Button bFinish = findViewById(R.id.btnFinish);
-        //Button bTestLoad = findViewById(R.id.btnTestLoad);
+        Button bTestLoad = findViewById(R.id.btnTestLoad);
         AppOverlay appOverlay = new AppOverlay();
 
         bFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "finish clicked!");
-                workoutSetup.makeNonEditable(llWorkout, bFinish, llAddExercise, bAddExercise);
                 workoutSetup.sendCurrentToDatabase(stringDate);
+                workoutSetup.makeNonEditable(llWorkout, bFinish, llAddExercise, bAddExercise);
+
+            }
+        });
+
+        bTestLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });

@@ -8,7 +8,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.squale.liftingtracker.models.Workout;
 import com.squale.liftingtracker.models.Exercise;
@@ -44,19 +46,25 @@ public class ExerciseDAO {
         databaseHelper.close();
     }
 
-    public Exercise createExercise(String exerciseName, long workoutId) {
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelperWorkout.COL_EXERCISE_NAME, exerciseName);
-        values.put(DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID, workoutId);
-        long insertId = database
-                .insert(DatabaseHelperWorkout.TABLE_EXERCISE, null, values);
-        Cursor cursor = database.query(DatabaseHelperWorkout.TABLE_EXERCISE, mAllColumns,
-                DatabaseHelperWorkout.COL_EXERCISE_ID + " = " + insertId
-                , null, null, null, null);
-        cursor.moveToFirst();
-        Exercise newExercise = cursorToExercise(cursor);
-        cursor.close();
-        return newExercise;
+    public long createExercise(Exercise exercise) {
+
+        long id = -1;
+        DatabaseHelperWorkout databaseHelperWorkout = DatabaseHelperWorkout.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelperWorkout.getWritableDatabase();
+        long workoutID = exercise.getWorkout().getId();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelperWorkout.COL_EXERCISE_NAME, exercise.getName());
+        contentValues.put(DatabaseHelperWorkout.COL_EXERCISE_WORKOUT_ID, workoutID);
+        try {
+            id = sqLiteDatabase.insertOrThrow(DatabaseHelperWorkout.TABLE_EXERCISE,  null, contentValues);
+        } catch (SQLiteException e){
+            Log.e(TAG, "Exception: " + e.getMessage());
+            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return id;
     }
 
     public void deleteExercise(Exercise exercise) {
